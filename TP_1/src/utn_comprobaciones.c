@@ -1,9 +1,10 @@
 /*
  * utn_comprobaciones.c
  *
- *  Created on: 11 sept 2021
+ *  Created on: 20 sept 2021
  *      Author: GONZALO
  */
+
 
 #include "utn_comprobaciones.h"
 static void imprimirErrores(int codigoError);
@@ -134,6 +135,7 @@ int utn_comprobarPosibilidadDeMostrarResultados(int banderaParaRealizarOperacion
 	}
 	return retorno;
 }
+
 
 
 

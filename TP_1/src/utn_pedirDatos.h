@@ -1,7 +1,7 @@
 /*
  * utn_pedirDatos.h
  *
- *  Created on: 15 sept 2021
+ *  Created on: 20 sept 2021
  *      Author: GONZALO
  */
 
@@ -15,5 +15,6 @@ int utn_pedirNumeroIntConMaxYMin(int* pNumero, int minimo, int maximo, int reint
 int utn_pedirNumeroIntSinMaxYMin(int* pNumero, int reintentos, char* pMensaje, char* pMensajeError);
 int utn_pedirNumeroFloatConMaxYMin(float* pNumero, float minimo, float maximo, int reintentos, char* pMensaje, char* pMensajeError);
 int utn_pedirNumeroFloatSinMaxMin(float* pNumero, int reintentos, char* pMensaje, char* pMensajeError);
+
 
 #endif /* UTN_PEDIRDATOS_H_ */

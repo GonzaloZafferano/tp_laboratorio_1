@@ -1,7 +1,7 @@
 /*
  * utn_operacionesMatematicas.c
  *
- *  Created on: 8 sept 2021
+ *  Created on: 20 sept 2021
  *      Author: GONZALO
  */
 
@@ -166,4 +166,5 @@ int utn_operacionCalcularFactorial(float numeroIngresado, float* pResultado)
 	}
 	return retorno;
 }
+
 

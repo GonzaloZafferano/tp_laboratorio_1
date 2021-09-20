@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : TP_1.c
- Author      : 
+ Author      : Gonzalo Zafferano
  Version     :
  Copyright   : Your copyright notice
  Description : Hello World in C, Ansi-style
@@ -50,7 +50,7 @@ int main(void)
 		{
 			utn_imprimirMenu(estadoPrimerNumero, estadoSegundoNumero, banderaMenu, numeroUno, numeroDos);
 			banderaMenu = 0;
-			estadoOperacion = utn_pedirNumeroIntConMaxYMin(&opcion, OPCIONES_MINIMO_MENU, OPCIONES_MAXIMO_MENU, REINTENTOS_MENU,"Por favor, ingrese una opcion valida...", "Error. Opcion invalida");
+			estadoOperacion = utn_pedirNumeroIntConMaxYMin(&opcion, OPCIONES_MINIMO_MENU, OPCIONES_MAXIMO_MENU, REINTENTOS_MENU,"Por favor, ingrese una opcion valida...", "-----Error. Opcion invalida-----");
 			utn_comprobarErrorDeOperacion(estadoOperacion);
 
 			//Si hay un problema para tomar datos, o se acaban los reintentos, no tiene sentido
@@ -70,7 +70,7 @@ int main(void)
 
 						//Al ingresarse correctamente el numero, pedir Float retorna un 0.
 						//de esta forma, se asigna el primer estado con 0 (necesario para la opcion 3)
-						estadoPrimerNumero = utn_pedirNumeroFloatSinMaxMin(&numeroUno, 2, "Por favor, ingrese el numero para Operando A...", "ERROR. Dato invalido");
+						estadoPrimerNumero = utn_pedirNumeroFloatSinMaxMin(&numeroUno, 2, "Por favor, ingrese el numero para Operando A...", "-----ERROR. Dato invalido-----");
 
 						utn_comprobarErrorDeOperacion(estadoPrimerNumero);
 
@@ -111,7 +111,7 @@ int main(void)
 
 						//Al ingresarse correctamente el numero, pedir Float retorna un 0.
 						//de esta forma, se inicializa el segundo estado con 0 (necesario para la opcion 3)
-						estadoSegundoNumero  = utn_pedirNumeroFloatSinMaxMin(&numeroDos, 2, "Por favor, ingrese el numero para Operando B...", "ERROR. Dato invalido");
+						estadoSegundoNumero  = utn_pedirNumeroFloatSinMaxMin(&numeroDos, 2, "Por favor, ingrese el numero para Operando B...", "-----ERROR. Dato invalido-----");
 
 						utn_comprobarErrorDeOperacion(estadoSegundoNumero);
 
