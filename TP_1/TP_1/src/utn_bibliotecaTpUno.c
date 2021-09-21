@@ -57,7 +57,7 @@ void utn_imprimirMenu(int banderaPrimerNumero, int banderaSegundoNumero, int ban
 }
 
 /*
-* \brief Imprime los resultados de las operaciones. Requiere un Array de tipo float con una longitud de 6 elementos.
+* \brief Imprime los resultados de las operaciones. Requiere un Array de tipo float con una longitud minima de 6 elementos.
 *		 Se apoya en las funciones imprimirFactorial() e imprimirDivision().
 * \param float numeroUno - Operando A
 * \param float numeroDos - Operando B
@@ -75,7 +75,8 @@ int utn_imprimirResultados(float numeroUno, float numeroDos, float pListaResutad
 	{
 		retorno = -7;
 
-		if(longitudResultadosOperaciones == 6)
+		//La longitud del array tiene que ser minimo de 6.
+		if(longitudResultadosOperaciones >= 6)
 		{
 			printf("\n\t<--Mostrando resultados de operaciones-->\n");
 			printf("\nA- El resultado de %.2f + %.2f es: %.2f",numeroUno, numeroDos, pListaResutadosOperaciones[0]);
@@ -141,7 +142,7 @@ static void imprimirDivision(float numeroUno, float numeroDos, float resultado)
 }
 
 /*
-* \brief realiza las operaciones matematicas disponibles. Requiere un Array de tipo float con una longitud de 6 elementos.
+* \brief realiza las operaciones matematicas disponibles. Requiere un Array de tipo float con una longitud minima de 6 elementos.
 * \param float numeroUno - Operando A
 * \param float numeroDos - Operando B
 * \param float pListaResutadosOperaciones[] - Array con los resultados de las operaciones
@@ -158,25 +159,26 @@ int utn_realizarOperaciones (float numeroUno, float numeroDos, float pListaResut
 	{
 		retorno = -7;//Si entro al IF, Asumo que hay un error con la longitud del array. Necesito que sea de 6.
 
-		if(longitudResultadosOperaciones == 6)
+		//La longitud del array tiene que ser minimo de 6.
+		if(longitudResultadosOperaciones >= 6)
 		{
 			estadoOperacion = utn_operacionSumar(numeroUno, numeroDos, &pListaResutadosOperaciones[0]);
-			utn_comprobarErrorDeOperacion(estadoOperacion);
+			utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 			estadoOperacion = utn_operacionRestar(numeroUno, numeroDos, &pListaResutadosOperaciones[1]);
-			utn_comprobarErrorDeOperacion(estadoOperacion);
+			utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 			estadoOperacion = utn_operacionDividir(numeroUno, numeroDos, &pListaResutadosOperaciones[2]);
-			utn_comprobarErrorDeOperacion(estadoOperacion);
+			utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 			estadoOperacion = utn_operacionMultiplicar(numeroUno, numeroDos, &pListaResutadosOperaciones[3]);
-			utn_comprobarErrorDeOperacion(estadoOperacion);
+			utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 			estadoOperacion = utn_operacionCalcularFactorial(numeroUno, &pListaResutadosOperaciones[4]);
-			utn_comprobarErrorDeOperacion(estadoOperacion);
+			utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 			estadoOperacion = utn_operacionCalcularFactorial(numeroDos, &pListaResutadosOperaciones[5]);
-			utn_comprobarErrorDeOperacion(estadoOperacion);
+			utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 			retorno = 0;
 		}

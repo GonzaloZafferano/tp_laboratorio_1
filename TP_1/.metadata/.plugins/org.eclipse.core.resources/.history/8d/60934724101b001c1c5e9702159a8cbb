@@ -1,0 +1,148 @@
+/*
+ * utn_comprobaciones.c
+ *
+ *  Created on: 20 sept 2021
+ *      Author: GONZALO
+ */
+
+
+#include "utn_comprobaciones.h"
+static void imprimirErrores(int codigoError);
+
+/*
+* \brief Evalua el exito (0) de una operacion. Si hay exito, no realiza acciones.
+*        Ante una falla (Distinto de 0), se apoya en otra funcion imprimirErrores(int codigoError),
+*        enviandole el estado recibido de la operacion (que almacena el codigo de error).
+* \param int estadoOperacion - Valor que identifica el estado (exito o falla) de una operacion.
+* \return 0 Si la operacion evaluada esta OK.
+*        -1 Si la operacion evaluada tiene un problema.
+*/
+int utn_comprobarEstadoDeOperacion(int estadoOperacion)
+{
+	int retorno = 0;
+	if(estadoOperacion !=0)
+	{
+		imprimirErrores(estadoOperacion);
+		retorno = -1;
+	}
+	return retorno;
+}
+
+/*
+* \brief Evalua el codigo de error recibido, e imprime el error asociado (si corresponde).
+* \param int codigoError - Codigo de identificacion del error
+* \return void.
+*/
+static void imprimirErrores(int codigoError)
+{
+	char* pMensaje;
+
+	switch(codigoError)
+	{
+		case 3:
+			pMensaje = "\n\t<--Ya ha realizado los calculosy se pueden mostrar los resultados! \n\tActualice uno o ambos operandos para realizar nuevos calculos.-->\n";
+			break;
+		case 2:
+			pMensaje = "\n-----Un momento! Se han realizado modificaciones en algunos operandos. \n\tPor favor, actualizar las operaciones con la opcion 3.-----\n ";
+			break;
+		case 1:
+			pMensaje = "\n-----ERROR. No se pueden mostrar resultados. Faltan realizar las operaciones matematicas (opcion 3).-----\n";
+			break;
+		case -1:
+			pMensaje = "\n-----ERROR. Direccion de memoria de parametros es NULL. No se puede operar.-----\n";
+			break;
+		case -2:
+			pMensaje = "\n-----ERROR. Se acabaron los reintentos para operar. No se aplicaron cambios.-----\n";
+			break;
+		case -3:
+			pMensaje = "\n-----ERROR. No se pueden realizar operaciones. Falta ingresar el operando A.-----\n";
+			break;
+		case -4:
+			pMensaje = "\n-----ERROR. No se pueden realizar operaciones. Falta ingresar el operando B.-----\n";
+			break;
+		case -5:
+			pMensaje = "\n-----ERROR. No se pueden realizar operaciones. Faltan ingresan los operandos A y B.-----\n";
+			break;
+		case -6:
+			pMensaje = "\n-----ERROR. No se pudo realizar la operacion de division. No se puede dividir por cero-----\n";
+			break;
+		case -7:
+			pMensaje = "\n-----ERROR. Longitud de ARRAY invalida. No se puede operar.-----\n";
+			break;
+		case -8:
+			pMensaje = "\n-----ERROR. Error con maximos y minimos en la toma de datos. No se pueden tomar los datos. \n\tFinalizando programa...-----\n";
+			break;
+		case -9:
+			pMensaje = "\n-----ERROR. No se realizo el Factorial de un operando porque es negativo. \n\tLos numeros NEGATIVOS no estan contemplados.-----\n";
+			break;
+		case -10:
+			pMensaje = "\n-----ERROR. No se realizo el Factorial de un operando porque no es entero. \n\tLos numeros con decimales no estan contemplados.-----\n";
+			break;
+		default :
+			pMensaje = "\n-----ERROR.-----\n";
+	}
+	printf("%s", pMensaje);
+}
+
+/*
+* \brief Evalua los estados del operando A y operando B, para identificar si uno de ellos, ambos o ninguno fue ingresado
+* \param int estadoNumUno - estado del operando A
+* \param int estadoNumDos - estado del operando B
+* \return  0 OK: ambos operando han sido ingresados
+*         -5 Ningun operando fue ingresado
+*         -3 El operando A no fue ingresado
+*         -4 El operando B no fue ingresado
+*/
+int utn_comprobarNumeroUnoYNumeroDos(int estadoOperandoA, int estadoOperandoB)
+{
+	int retorno = 0;
+
+	if(estadoOperandoA !=0 && estadoOperandoB != 0)
+	{
+		retorno = -5; //Faltan ambos operandos
+	}
+	else
+	{
+		if(estadoOperandoA != 0)
+		{
+			retorno = -3; //Falta el primer operando
+		}
+		else
+		{
+			if(estadoOperandoB != 0)
+			{
+				retorno = -4; //Falta el segundo operando
+			}
+		}
+	}
+	return retorno;
+}
+
+/*
+* \brief Evalua si estan dadas las condiciones para mostrar los resultados las operaciones matematicas
+* \param int banderaParaRealizarOperaciones - Bandera que indica la posibilidad de operar (0) o no.
+* \return  0 OK: Se pueden mostrar los resultados.
+*          1 Faltan realizar las operaciones matematicas
+*          2 Se detecto un cambio en los operandos, y se deben actualizar las operaciones
+*/
+int utn_comprobarPosibilidadDeMostrarResultados(int banderaParaRealizarOperaciones)
+{
+	int retorno = 0;//Indica que esta todo OK para mostrar los resultados.
+
+	switch(banderaParaRealizarOperaciones)
+	{
+		case 1:
+			utn_comprobarEstadoDeOperacion(banderaParaRealizarOperaciones);
+			retorno = 1; //Indica que hay que REALIZAR las operaciones matematicas (opcion 3)
+			break;
+		case 2:
+			utn_comprobarEstadoDeOperacion(banderaParaRealizarOperaciones);
+			retorno = 2; //Indica que hay que ACTUALIZAR las operaciones matematicas (opcion 3)
+			break;
+	}
+	return retorno;
+}
+
+
+
+

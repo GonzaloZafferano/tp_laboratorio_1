@@ -11,17 +11,21 @@ static void imprimirErrores(int codigoError);
 
 /*
 * \brief Evalua el exito (0) de una operacion. Si hay exito, no realiza acciones.
-*        Ante una falla (Distinto de 0), se apoya en otra funcion imprimirErrores (int codigoError),
+*        Ante una falla (Distinto de 0), se apoya en otra funcion imprimirErrores(int codigoError),
 *        enviandole el estado recibido de la operacion (que almacena el codigo de error).
 * \param int estadoOperacion - Valor que identifica el estado (exito o falla) de una operacion.
-* \return void.
+* \return 0 Si la operacion evaluada esta OK.
+*        -1 Si la operacion evaluada tiene un problema.
 */
-void utn_comprobarErrorDeOperacion(int estadoOperacion)
+int utn_comprobarEstadoDeOperacion(int estadoOperacion)
 {
+	int retorno = 0;
 	if(estadoOperacion !=0)
 	{
 		imprimirErrores(estadoOperacion);
+		retorno = -1;
 	}
+	return retorno;
 }
 
 /*
@@ -35,11 +39,14 @@ static void imprimirErrores(int codigoError)
 
 	switch(codigoError)
 	{
+		case 3:
+			pMensaje = "\n\t<--Ya ha realizado los calculos y se pueden mostrar los resultados! (opcion 4) \n\tActualice correctamente uno o ambos operandos para realizar nuevos calculos.-->\n";
+			break;
 		case 2:
 			pMensaje = "\n-----Un momento! Se han realizado modificaciones en algunos operandos. \n\tPor favor, actualizar las operaciones con la opcion 3.-----\n ";
 			break;
 		case 1:
-			pMensaje = "\n-----ERROR. No se pueden mostrar resultados. Faltan realizar las operaciones matematicas (opcion 3).-----\n";
+			pMensaje = "\n-----ERROR. No se pueden mostrar resultados. \n\tFaltan realizar las operaciones matematicas (opcion 3).-----\n";
 			break;
 		case -1:
 			pMensaje = "\n-----ERROR. Direccion de memoria de parametros es NULL. No se puede operar.-----\n";
@@ -63,7 +70,7 @@ static void imprimirErrores(int codigoError)
 			pMensaje = "\n-----ERROR. Longitud de ARRAY invalida. No se puede operar.-----\n";
 			break;
 		case -8:
-			pMensaje = "\n-----ERROR. Error con maximos y minimos en la toma de datos. No se pueden tomar los datos. \n\tFinalizando programa...-----\n";
+			pMensaje = "\n-----ERROR. Error con maximos y minimos en la toma de datos. \n\tNo se pueden tomar los datos. Finalizando programa...-----\n";
 			break;
 		case -9:
 			pMensaje = "\n-----ERROR. No se realizo el Factorial de un operando porque es negativo. \n\tLos numeros NEGATIVOS no estan contemplados.-----\n";
@@ -125,11 +132,11 @@ int utn_comprobarPosibilidadDeMostrarResultados(int banderaParaRealizarOperacion
 	switch(banderaParaRealizarOperaciones)
 	{
 		case 1:
-			utn_comprobarErrorDeOperacion(banderaParaRealizarOperaciones);
+			utn_comprobarEstadoDeOperacion(banderaParaRealizarOperaciones);
 			retorno = 1; //Indica que hay que REALIZAR las operaciones matematicas (opcion 3)
 			break;
 		case 2:
-			utn_comprobarErrorDeOperacion(banderaParaRealizarOperaciones);
+			utn_comprobarEstadoDeOperacion(banderaParaRealizarOperaciones);
 			retorno = 2; //Indica que hay que ACTUALIZAR las operaciones matematicas (opcion 3)
 			break;
 	}

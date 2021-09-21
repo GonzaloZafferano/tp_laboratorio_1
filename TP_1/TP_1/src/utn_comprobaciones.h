@@ -11,7 +11,7 @@
 #ifndef UTN_COMPROBACIONES_H_
 #define UTN_COMPROBACIONES_H_
 
-void utn_comprobarErrorDeOperacion(int estadoOperacion);
+int utn_comprobarEstadoDeOperacion(int estadoOperacion);
 int utn_comprobarNumeroUnoYNumeroDos(int estadoOperandoA, int estadoOperandoB);
 int utn_comprobarPosibilidadDeMostrarResultados(int banderaParaRealizarOperaciones);
 
