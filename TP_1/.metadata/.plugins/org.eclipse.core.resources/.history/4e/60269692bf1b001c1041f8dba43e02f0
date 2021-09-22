@@ -8,6 +8,7 @@
  ============================================================================
  */
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn_operacionesMatematicas.h"
@@ -15,7 +16,7 @@
 #include "utn_comprobaciones.h"
 #include "utn_bibliotecaTpUno.h"
 
-#define CANTIDAD_RESULTADOS_OPERACIONES 6
+#define CANTIDAD_RESULTADOS_OPERACIONES 5
 #define VALOR_INICIAL_ARRAY 0.0
 #define CERRAR_APLICACION 5
 #define OPCIONES_MINIMO_MENU 1

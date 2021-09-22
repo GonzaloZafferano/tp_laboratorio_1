@@ -40,13 +40,13 @@ static void imprimirErrores(int codigoError)
 	switch(codigoError)
 	{
 		case 3:
-			pMensaje = "\n\t<--Un momento! Ya ha realizado los calculos y se pueden mostrar los resultados! (con la opcion 4) \n\tActualice correctamente uno o ambos operandos para realizar nuevos calculos.-->\n";
+			pMensaje = "\n\t<--Ya ha realizado los calculos y se pueden mostrar los resultados! (opcion 4) \n\tActualice correctamente uno o ambos operandos para realizar nuevos calculos.-->\n";
 			break;
 		case 2:
 			pMensaje = "\n-----Un momento! Se han realizado modificaciones en algunos operandos. \n\tPor favor, actualizar las operaciones con la opcion 3.-----\n ";
 			break;
 		case 1:
-			pMensaje = "\n-----ERROR. No se pueden mostrar resultados. \n\tFaltan realizar las operaciones matematicas (con la opcion 3).-----\n";
+			pMensaje = "\n-----ERROR. No se pueden mostrar resultados. \n\tFaltan realizar las operaciones matematicas (opcion 3).-----\n";
 			break;
 		case -1:
 			pMensaje = "\n-----ERROR. Direccion de memoria de parametros es NULL. No se puede operar.-----\n";

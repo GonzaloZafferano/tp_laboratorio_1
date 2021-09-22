@@ -51,7 +51,7 @@ void utn_imprimirMenu(int banderaPrimerNumero, int banderaSegundoNumero, int ban
 			"\n\tb) Calcular la resta (A-B)"
 			"\n\tc) Calcular la division (A/B)"
 			"\n\td) Calcular la multiplicacion (A*B)"
-			"\n\te) Calcular el factorial (A!) y (B!)");
+			"\n\te) Calcular el factorial (A!)");
 	printf("\n4. Informar resultados");
 	printf("\n5. Salir");
 }
