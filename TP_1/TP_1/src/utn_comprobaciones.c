@@ -1,7 +1,7 @@
 /*
  * utn_comprobaciones.c
  *
- *  Created on: 20 sept 2021
+ *  Created on: 23 sept 2021
  *      Author: GONZALO
  */
 
@@ -145,6 +145,7 @@ int utn_comprobarPosibilidadDeMostrarResultados(int banderaParaRealizarOperacion
 	}
 	return retorno;
 }
+
 
 
 

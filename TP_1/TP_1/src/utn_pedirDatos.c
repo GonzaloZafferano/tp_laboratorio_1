@@ -1,9 +1,10 @@
 /*
  * utn_pedirDatos.c
  *
- *  Created on: 20 sept 2021
+ *  Created on: 23 sept 2021
  *      Author: GONZALO
  */
+
 
 #include "utn_pedirDatos.h"
 
@@ -186,8 +187,3 @@ int utn_pedirNumeroFloatSinMaxMin(float* pNumero, int reintentos, char* pMensaje
 	}
 	return retorno;
 }
-
-
-
-
-

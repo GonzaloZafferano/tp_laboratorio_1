@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;TP_1/src/utn_biblioteca.h&apos;" deleteContents="false" description="Delete resource &apos;TP_1/src/utn_biblioteca.h&apos;" element1="/TP_1/src/utn_biblioteca.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1632169931970"/>&#x0A;<refactoring comment="Delete resource &apos;TP_1/src/utn_biblioteca.c&apos;" deleteContents="false" description="Delete resource &apos;TP_1/src/utn_biblioteca.c&apos;" element1="/TP_1/src/utn_biblioteca.c" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1632169934517"/>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;TP_1&apos;" deleteContents="false" description="Delete resource &apos;TP_1&apos;" element1="/TP_1" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1632426280158"/>
 </session>

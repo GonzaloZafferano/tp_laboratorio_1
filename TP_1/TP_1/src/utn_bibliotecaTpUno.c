@@ -1,9 +1,10 @@
 /*
  * utn_bibliotecaTpUno.c
  *
- *  Created on: 20 sept 2021
+ *  Created on: 23 sept 2021
  *      Author: GONZALO
  */
+
 
 
 #include "utn_bibliotecaTpUno.h"
@@ -222,4 +223,5 @@ int utn_inicializarArray(float pArray[], int longitudArray, float valorInicial)
 	}
 	return retorno;
 }
+
 
