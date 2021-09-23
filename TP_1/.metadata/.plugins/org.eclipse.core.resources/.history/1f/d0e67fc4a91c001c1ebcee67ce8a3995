@@ -147,7 +147,7 @@ int utn_operacionCalcularFactorial(float numeroIngresado, float* pResultado)
 		{
 			if(numeroIngresado <= 12)
 			{
-				retorno = -10; //Si entro al IF, no es mayor que 12, entonces asumo que va a ser un numero con decimal.
+				retorno = -10; //Asumo que va a ser un numero con decimal.
 				if(utn_esEntero(numeroIngresado)) //Si entra en este IF, el numero es Positivo y Entero. Entonces puedo retornar 0.
 				{
 					numeroEntero = (int)numeroIngresado; //Casteo a INT para trabajar

@@ -135,7 +135,7 @@ int utn_operacionCalcularFactorial(float numeroIngresado, float* pResultado)
 
 	if(pResultado != NULL)
 	{
-		retorno = -11; //Asumo que sera mayor que 12 (lo cual no podria calcular)
+		retorno = -10; //Asumo que va a ser un numero con decimal.
 		*pResultado = 0.0;
 		//Si el numero es negativo o decimal, se almacena un 0 en el *pResultado. Se eligio el valor 0 por defecto, ya que ningun factorial da 0.
 
@@ -145,9 +145,10 @@ int utn_operacionCalcularFactorial(float numeroIngresado, float* pResultado)
 		}
 		else
 		{
+			retorno = -11; //Asumo que sera mayor que 12 (lo cual no podria calcular)
+
 			if(numeroIngresado <= 12)
 			{
-				retorno = -10; //Si entro al IF, no es mayor que 12, entonces asumo que va a ser un numero con decimal.
 				if(utn_esEntero(numeroIngresado)) //Si entra en este IF, el numero es Positivo y Entero. Entonces puedo retornar 0.
 				{
 					numeroEntero = (int)numeroIngresado; //Casteo a INT para trabajar

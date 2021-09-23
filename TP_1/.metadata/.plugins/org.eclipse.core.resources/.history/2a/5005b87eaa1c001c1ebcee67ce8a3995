@@ -114,7 +114,7 @@ static void imprimirFactorial(float operando, float resultado)
 	{
 		if(operando > 12)
 		{
-			printf("El operando %f supera el limite (12) para calcular el factorial. ", operando);
+			printf("El operando %.0f supera el limite (12) para calcular el factorial. ", operando);
 		}
 		else
 		{
