@@ -78,6 +78,9 @@ static void imprimirErrores(int codigoError)
 		case -10:
 			pMensaje = "\n-----ERROR. No se realizo el Factorial de un operando porque no es entero. \n\tLos numeros con decimales no estan contemplados.-----\n";
 			break;
+		case -11:
+			pMensaje = "\n-----ERROR. No se realizo el Factorial de un operando porque supera el limite de esta calculadora. \n\tLos operandos mayores a 12 no estan contemplados por tener Factoriales muy largos.-----\n";
+			break;
 		default :
 			pMensaje = "\n-----ERROR.-----\n";
 	}

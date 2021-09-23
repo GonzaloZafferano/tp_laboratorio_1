@@ -124,6 +124,7 @@ int utn_esEntero(float numeroOriginal)
 *          0 OK: si la direccion de memoria es distinto de NULL y pudo operar satisfactoriamente.
 *		  -9 si el numero ingresado es NEGATIVO.
 *		  -10 si el numero ingresado tiene parte decimal.
+*		  -11 Si el operando es mayor a 12 (limite de esta calculadora).
 */
 int utn_operacionCalcularFactorial(float numeroIngresado, float* pResultado)
 {
@@ -144,23 +145,28 @@ int utn_operacionCalcularFactorial(float numeroIngresado, float* pResultado)
 		}
 		else
 		{
-			if(utn_esEntero(numeroIngresado)) //Si entra en este IF, el numero es Positivo y Entero. Entonces puedo retornar 0.
-			{
-				numeroEntero = (int)numeroIngresado; //Casteo a INT para trabajar
+			retorno = -11; //Asumo que sera mayor que 12 (lo cual no podria calcular)
 
-				if(numeroEntero == 0)
+			if(numeroIngresado <= 12)
+			{
+				if(utn_esEntero(numeroIngresado)) //Si entra en este IF, el numero es Positivo y Entero. Entonces puedo retornar 0.
 				{
-					*pResultado = 1; //El factorial de 0 es 1.
-				}
-				else
-				{
-					for(i = 1; i <= numeroEntero; i++)
+					numeroEntero = (int)numeroIngresado; //Casteo a INT para trabajar
+
+					if(numeroEntero == 0)
 					{
-						acumulador = acumulador * i;
+						*pResultado = 1; //El factorial de 0 es 1.
 					}
-					*pResultado = acumulador;
+					else
+					{
+						for(i = 1; i <= numeroEntero; i++)
+						{
+							acumulador = acumulador * i;
+						}
+						*pResultado = acumulador;
+					}
+					retorno= 0;
 				}
-				retorno= 0;
 			}
 		}
 	}

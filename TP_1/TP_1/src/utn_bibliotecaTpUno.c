@@ -111,14 +111,22 @@ static void imprimirFactorial(float operando, float resultado)
 	}
 	else
 	{
-		if(utn_esEntero(operando))
+		if(operando > 12)
 		{
-			printf("El factorial de %.0f es: %.0f. ", operando, resultado);
+			printf("El operando %.0f supera el limite (12) para calcular el factorial. ", operando);
 		}
 		else
 		{
-			printf("El operando %f no es entero, por lo que no se evaluo su Factorial. ", operando);
+			if(utn_esEntero(operando))
+			{
+				printf("El factorial de %.0f es: %.0f. ", operando, resultado);
+			}
+			else
+			{
+				printf("El operando %f no es entero, por lo que no se evaluo su Factorial. ", operando);
+			}
 		}
+
 	}
 }
 

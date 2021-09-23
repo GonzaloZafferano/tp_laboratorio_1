@@ -278,3 +278,68 @@ collect2.exe: error: ld returned 1 exit status
 Info: Internal Builder is used for build
 gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
 Info: Nothing to build for TP_1
+16:06:22 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_comprobaciones.o" "..\\src\\utn_comprobaciones.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_pedirDatos.o" "..\\src\\utn_pedirDatos.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_operacionesMatematicas.o" "..\\src\\utn_operacionesMatematicas.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_1.o" "..\\src\\TP_1.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_bibliotecaTpUno.o" "..\\src\\utn_bibliotecaTpUno.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
+16:14:58 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_bibliotecaTpUno.o" "..\\src\\utn_bibliotecaTpUno.c" 
+..\src\utn_bibliotecaTpUno.c: In function 'imprimirFactorial':
+..\src\utn_bibliotecaTpUno.c:116:25: warning: format '%f' expects a matching 'double' argument [-Wformat=]
+  116 |    printf("El operando %f supera el limite (12) para calcular el factorial");
+      |                        ~^
+      |                         |
+      |                         double
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_1.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+16:15:03 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+Info: Nothing to build for TP_1
+16:16:05 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_bibliotecaTpUno.o" "..\\src\\utn_bibliotecaTpUno.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+16:16:16 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_bibliotecaTpUno.o" "..\\src\\utn_bibliotecaTpUno.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+16:17:16 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_bibliotecaTpUno.o" "..\\src\\utn_bibliotecaTpUno.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_1.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+16:22:11 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_operacionesMatematicas.o" "..\\src\\utn_operacionesMatematicas.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_comprobaciones.o" "..\\src\\utn_comprobaciones.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+16:23:25 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_comprobaciones.o" "..\\src\\utn_comprobaciones.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
+16:25:17 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_bibliotecaTpUno.o" "..\\src\\utn_bibliotecaTpUno.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+16:29:13 **** Incremental Build of configuration Debug for project TP_1 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\utn_operacionesMatematicas.o" "..\\src\\utn_operacionesMatematicas.c" 
+gcc -o TP_1.exe "src\\TP_1.o" "src\\utn_bibliotecaTpUno.o" "src\\utn_comprobaciones.o" "src\\utn_operacionesMatematicas.o" "src\\utn_pedirDatos.o" 
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
+Info: Nothing to build for TP_1
