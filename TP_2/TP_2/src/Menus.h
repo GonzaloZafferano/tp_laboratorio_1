@@ -14,7 +14,7 @@
 #ifndef MENUS_H_
 #define MENUS_H_
 
-void imprimirMenuPrincipal();
+void imprimirMenuPrincipal(void);
 void imprimirMenuSecundario(int opcionUno, int opcionDos);
 int esPosibleOperar(int bandera);
 int operarMenuBajas(Employee listaEmpleados[], int len);

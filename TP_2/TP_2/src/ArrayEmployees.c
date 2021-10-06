@@ -8,12 +8,16 @@
 
 #include "ArrayEmployees.h"
 
+#define VACIO 1
+#define OCUPADO 0
 #define MAXIMO_LEN 1000
 #define MAXIMO_ID 9999
 #define SECTOR_MINIMO 1
 #define SECTOR_MAXIMO 10
 #define SALARIO_MINIMO 40000
 #define SALARIO_MAXIMO 5000000
+#define MOSTRAR_TODOS_LOS_DATOS_DEL_EMPLEADO 1
+#define MOSTRAR_ID_NOMBRE_EMPLEADOS_DISPONIBLES 2
 #define REINTENTOS 2
 #define HAY_EMPLEADOS 1
 #define OPERACION_EXITOSA 0
@@ -33,10 +37,91 @@
 #define NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO -20
 #define ARRAY_COMPLETO -21
 #define I_O_J_ESTA_FUERA_DE_RANGO -23
+#define NO_SE_CARGO_NINGUN_ALTA -25
 
-static void imprimirEncabezadoDeTablaEmpleados(void);
-static int swapEmpleados(Employee listaEmpleados[], int i, int j);
 static int generadorDeIds(void);
+static void imprimirEncabezadoDeTablaEmpleados(int opcion);
+static void imprimirFilaDeEmpleado(Employee empleado, int opcion);
+static int swapEmpleados(Employee listaEmpleados[], int i, int j);
+
+/**
+* \brief Genera un ID, que es acumulativo.
+* \param VOID -
+* \return retorna INT. Un entero positivo que es el ID generado
+*/
+static int generadorDeIds(void)
+{
+	static int id = 0;
+	id++;
+	return id;
+}
+
+/** \brief Imprime los encabezados de la tabla de datos.
+* \param VOID -
+* \return VOID
+*/
+static void imprimirEncabezadoDeTablaEmpleados(int opcion)
+{
+	switch(opcion)
+	{
+		case 1:
+			printf("\n%5s  %-15s %-15s %18s %12s", "Id", "Nombre", "Apellido", "Salario", "Sector");
+			break;
+		case 2:
+			printf("\n\n\t\t<--Lista de Ids disponibles-->\n%5s  %-15s %-15s", "Id", "Nombre", "Apellido");
+			break;
+	}
+}
+
+/** \brief Imprime los datos de un empleado ya validado previamente.
+ * 		   (Id, nombre, apellido, salario, sector).
+* \param Employee empleado - Empleado cuyos datos se quieren imprimir
+* \return VOID
+*/
+static void imprimirFilaDeEmpleado(Employee empleado, int opcion)
+{
+	switch(opcion)
+	{
+		case 1:
+			printf("\n%5d  %-15.15s %-15.15s   $%15.4f %12d", empleado.id, empleado.name, empleado.lastName, empleado.salary, empleado.sector);
+			break;
+		case 2:
+			printf("\n%5d  %-15.15s %-15.15s", empleado.id, empleado.name, empleado.lastName);
+			break;
+	}
+}
+
+/** \brief Cambia la posicion de 2 empleados
+* \param Employee listaEmpleados [] - Lista de empleados
+* \param int i - Indice en el array, del empleado A
+* \param int i - Indice en el array, del empleado B
+* \return INT. 0 Si pudo operar correctamente
+* 			  -1 si la direccion de memoria del array es NULL
+* 			  -13 si el parametro i no es distinto del parametro j.
+* 			  -23 si el indice de i o j estan fuera del rango.
+*/
+static int swapEmpleados(Employee listaEmpleados[], int i, int j)
+{
+	int retorno = PUNTERO_NULL;
+	Employee auxiliar;
+
+	if(listaEmpleados != NULL)
+	{
+		retorno = I_O_J_ESTA_FUERA_DE_RANGO;
+		if((i >= 0 && i < MAXIMO_LEN) && (j >= 0 && j < MAXIMO_LEN))// i y j son indices, por eso van de 0 a < maximo
+		{
+			retorno = PARAMETRO_I_NO_ES_DISTINTO_DE_J;
+			if(i != j)
+			{
+				auxiliar = listaEmpleados[i];
+				listaEmpleados[i] = listaEmpleados[j];
+				listaEmpleados[j] = auxiliar;
+				retorno = OPERACION_EXITOSA;
+			}
+		}
+	}
+	return retorno;
+}
 
 /**
 * \brief Inicializa la bandera 'IsEmpty' en 1 en todas las posiciones,
@@ -59,7 +144,7 @@ int initEmployees(Employee* list, int len)
 		{
 			for(i = 0; i < len; i++)
 			{
-				list[i].isEmpty = 1;
+				list[i].isEmpty = VACIO;
 			}
 			retorno = OPERACION_EXITOSA;
 		}
@@ -78,8 +163,8 @@ int initEmployees(Employee* list, int len)
 */
 int verificarSiHayEmpleados(Employee listaEmpleados[], int len)
 {
-	int retorno = PUNTERO_NULL;
 	int i;
+	int retorno = PUNTERO_NULL;
 
 	if(listaEmpleados != NULL)
 	{
@@ -89,7 +174,7 @@ int verificarSiHayEmpleados(Employee listaEmpleados[], int len)
 			retorno = NO_HAY_EMPLEADOS;
 			for(i = 0; i < len; i++)
 			{
-				if(listaEmpleados[i].isEmpty == 0)
+				if(listaEmpleados[i].isEmpty == OCUPADO)
 				{
 					retorno = HAY_EMPLEADOS;
 					break;
@@ -99,38 +184,8 @@ int verificarSiHayEmpleados(Employee listaEmpleados[], int len)
 	}
 	return retorno;
 }
-/**
-* \brief Genera un ID, que es acumulativo.
-* \param VOID -
-* \return retorna INT. Un entero positivo que es el ID generado
-*/
-static int generadorDeIds(void)
-{
-	static int id = 0;
-	id++;
-	return id;
-}
 
-/** \brief Imprime los encabezados de la tabla de datos.
-* \param VOID -
-* \return VOID
-*/
-static void imprimirEncabezadoDeTablaEmpleados(void)
-{
-	printf("\n%5s  %-15s %-15s %18s %12s", "Id", "Nombre", "Apellido", "Salario", "Sector");
-}
-
-/** \brief Imprime los datos de un empleado ya validado previamente.
- * 		   (Id, nombre, apellido, salario, sector).
-* \param Employee empleado - Empleado cuyos datos se quieren imprimir
-* \return VOID
-*/
-static void imprimirFilaDeEmpleado(Employee empleado)
-{
-	printf("\n%5d  %-15.15s %-15.15s   $%15.4f %12d", empleado.id, empleado.name, empleado.lastName, empleado.salary, empleado.sector);
-}
-
-/** \brief Agrega en una lista existente de tipo Employees los valores recibidos por parametro,
+/** \brief Agrega en un elemento de la lista existente de tipo Employees los valores recibidos por parametro,
  *         en la primer posicion vacia que este disponible.
 * \param Employee* list - Array de tipo Employee
 * \param int len - largo del array
@@ -143,11 +198,11 @@ static void imprimirFilaDeEmpleado(Employee empleado)
 *          retorna -1 si la direccion de memoria del array es NULL,
 *          retorna -2 si el len es invalido
 *          retorna -11 si el ID esta fuera de rango
-*          retorno -21 si todos los espacios estan ocupados.
+*          retorno -25 si no se pudo dar el alta.
 */
 int addEmployees(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector)
 {
-	int i;
+	int indiceLibre;
 	int retorno = PUNTERO_NULL;
 
 	if(list != NULL && name != NULL && lastName != NULL)
@@ -161,26 +216,56 @@ int addEmployees(Employee* list, int len, int id, char name[],char lastName[],fl
 			//Entonces, la carga de nuevos empleados tomara el siguiente ID.
 			if(id > 0 && id <= MAXIMO_ID)
 			{
-				retorno = ARRAY_COMPLETO;
-				for(i = 0; i < len; i++)
+				retorno = NO_SE_CARGO_NINGUN_ALTA;
+				indiceLibre = buscarIndiceLibre(list, len);
+				if(utn_comprobarEstadoDeOperacion(indiceLibre))
 				{
-					if(list[i].isEmpty == 1)
-					{
-						list[i].id = id;
-						list[i].salary = salary;
-						list[i].sector = sector;
-						strncpy(list[i].name, name, sizeof(list[i].name));
-						strncpy(list[i].lastName, lastName, sizeof(list[i].name));
-						list[i].isEmpty = 0;
-						retorno = OPERACION_EXITOSA;
-						break;
-					}
+					list[indiceLibre].id = id;
+					list[indiceLibre].salary = salary;
+					list[indiceLibre].sector = sector;
+					strncpy(list[indiceLibre].name, name, sizeof(list[indiceLibre].name));
+					strncpy(list[indiceLibre].lastName, lastName, sizeof(list[indiceLibre].name));
+					list[indiceLibre].isEmpty = OCUPADO;
+					retorno = OPERACION_EXITOSA;
 				}
 			}
 		}
 	}
 	return retorno;
 }
+
+/** \brief Busca un indice libre que pueda ser cargado de datos.
+* \param Employee listaEmpleados[] - Array de tipo Employee
+* \param int len - largo del array
+* \return Retorna INT. 0 o un numero positivo, que es el indice libre encontrado
+*          retorna -1 si la direccion de memoria del array es NULL,
+*          retorna -2 si el len es invalido
+*          retorno -21 si todos los espacios estan ocupados.
+*/
+int buscarIndiceLibre(Employee listaEmpleados[], int len)
+{
+	int i;
+	int retorno = PUNTERO_NULL;
+
+	if(listaEmpleados != NULL)
+	{
+		retorno = LEN_INVALIDO;
+		if(len > 0  && len <= MAXIMO_LEN)
+		{
+			retorno = ARRAY_COMPLETO;
+			for(i = 0; i < len; i++)
+			{
+				if(listaEmpleados[i].isEmpty == VACIO)
+				{
+					retorno = i;
+					break;
+				}
+			}
+		}
+	}
+	return retorno;
+}
+
 
 /** \brief Toma los datos de un empleado para posteriormente enviarselos a
  * 			la funcion addEmployee() quien se encargara de cargarlo en el sistema.
@@ -265,7 +350,7 @@ int findEmployeeById(Employee* list, int len,int id)
 				retorno = NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID;
 				for(i = 0; i< len ; i++)
 				{
-					if(list[i].isEmpty == 0 && list[i].id == id)
+					if(list[i].isEmpty == OCUPADO && list[i].id == id)
 					{
 						retorno = i;
 						break;
@@ -284,7 +369,7 @@ int findEmployeeById(Employee* list, int len,int id)
 * \return Retorna INT. 0 Si se opero correctamente,
 *         retorna -14 si no se pudieron tomar los datos correctamente.
 */
-int campoAModificar(Employee* auxiliar,int opcion)
+int campoAModificar(Employee* auxiliar, int opcion)
 {
 	int retorno = NO_SE_CARGARON_TODOS_LOS_CAMPOS;
 	int estadoOperacion;
@@ -319,56 +404,41 @@ int campoAModificar(Employee* auxiliar,int opcion)
 * \param int opcion - Opcion que indica que elemento se modificara.
 * \return Retorna INT. 0 Si se opero correctamente,
 *          retorna -1 si la direccion de memoria del array es NULL,
-*          retorna -2 si el len es invalido
-*          retorna -11 si el ID esta fuera de rango
 *          retorna -15 si no se pudo realizar la modificacion del empleado.
 */
-int modificarEmpleado(Employee listaEmpleados[], int len, int id, int opcion)
+int modificarEmpleado(Employee* empleado, int opcion)
 {
 	Employee auxiliar;
-	int retorno = PUNTERO_NULL;
-	int indice;
 	int estadoOperacion;
+	int retorno = PUNTERO_NULL;
 
-	if(listaEmpleados != NULL)
+	if(empleado != NULL)
 	{
-		retorno = LEN_INVALIDO;
-		if(len >0 && len <=MAXIMO_LEN) //Hay un limite de 1000 empleados en el array
+		estadoOperacion = campoAModificar(&auxiliar, opcion);
+		if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 		{
-			retorno = ID_FUERA_DE_RANGO;
-			if(id > 0 && id <= MAXIMO_ID)
+			switch(opcion)
 			{
-				estadoOperacion = findEmployeeById(listaEmpleados, len, id);
-				if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-				{
-					indice = estadoOperacion;
-					estadoOperacion = campoAModificar(&auxiliar,opcion);
-					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-					{
-						switch(opcion)
-						{
-						case 1:
-							strncpy(listaEmpleados[indice].name, auxiliar.name, sizeof(listaEmpleados[indice].name));
-							break;
-						case 2:
-							strncpy(listaEmpleados[indice].lastName, auxiliar.lastName, sizeof(listaEmpleados[indice].lastName));
-							break;
-						case 3:
-							listaEmpleados[indice].salary = auxiliar.salary;
-							break;
-						case 4:
-							listaEmpleados[indice].sector = auxiliar.sector;
-							break;
-						}
-					retorno = OPERACION_EXITOSA;
-					}
-				}
-
-				if(estadoOperacion <0)
-				{
-					retorno = NO_SE_APLICARON_CAMBIOS_SOBRE_EL_EMPLEADO;
-				}
+				case 1:
+					strncpy(empleado->name, auxiliar.name, sizeof(empleado->name));
+					break;
+				case 2:
+					strncpy(empleado->lastName, auxiliar.lastName, sizeof(empleado->lastName));
+					break;
+				case 3:
+					empleado->salary = auxiliar.salary;
+					break;
+				case 4:
+					empleado->sector = auxiliar.sector;
+					break;
 			}
+
+		retorno = OPERACION_EXITOSA;
+		}
+
+		if(estadoOperacion <0)
+		{
+			retorno = NO_SE_APLICARON_CAMBIOS_SOBRE_EL_EMPLEADO;
 		}
 	}
 	return retorno;
@@ -383,12 +453,11 @@ int modificarEmpleado(Employee listaEmpleados[], int len, int id, int opcion)
 * 		  Retorna -2 si hay el largo del array es invalido
 * 		  Retorna -11 si el ID es invalido
 * 		  retorna -19 si no se aplicaron bajas en el sistema (porque el ID no tiene datos).
-*
 */
 int removeEmployee(Employee* list, int len, int id)
 {
-	int retorno = PUNTERO_NULL;
 	int indiceRecibido;
+	int retorno = PUNTERO_NULL;
 
 	if(list != NULL)
 	{
@@ -403,7 +472,7 @@ int removeEmployee(Employee* list, int len, int id)
 				indiceRecibido = findEmployeeById(list, len, id);
 				if(utn_comprobarEstadoDeOperacion(indiceRecibido))
 				{
-					list[indiceRecibido].isEmpty = 1;
+					list[indiceRecibido].isEmpty = VACIO;
 					retorno = OPERACION_EXITOSA;
 				}
 			}
@@ -412,40 +481,57 @@ int removeEmployee(Employee* list, int len, int id)
 	return retorno;
 }
 
-/** \brief Imprime el contenido del array listaEmpleados[] recibido por parametro
-* \param Employee listaEmpleados[] - lista para imprimir
+/** \brief Imprime los campos Id, nombre y apellido del array listaEmpleados[] recibido por parametro
+* \param Employee  listaEmpleados[] - lista para imprimir
 * \param int len - largo del array
 * \return INT. 0 Si pudo operar correctamente
 * 			  -1 si la direccion de memoria del array es NULL
 * 			  -2 si el largo del array es invalido
-* 			 -20 si no se encontraron datos asociados al ID indicado
 */
-int printOneEmployee(Employee listaEmpleados[], int len, int Id)
+int imprimirIdsDisponibles(Employee listaEmpleados[], int len)
 {
+	int i;
 	int retorno = PUNTERO_NULL;
-	int indiceRecibido;
-
-	if(listaEmpleados != NULL)
+	if(listaEmpleados!= NULL)
 	{
 		retorno = LEN_INVALIDO;
-		if(len > 0 && len <= MAXIMO_LEN)
+		if(len >0 && len <= MAXIMO_LEN)
 		{
-			retorno = NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO;
-
-			indiceRecibido = findEmployeeById(listaEmpleados, len, Id);
-			if(utn_comprobarEstadoDeOperacion(indiceRecibido))
+			retorno = OPERACION_EXITOSA;
+			imprimirEncabezadoDeTablaEmpleados(MOSTRAR_ID_NOMBRE_EMPLEADOS_DISPONIBLES);
+			for(i = 0; i < len; i++)
 			{
-				printf("\n\t\t<--Datos asociados al ID: < %d >-->\n", Id);
-				imprimirEncabezadoDeTablaEmpleados();
-				imprimirFilaDeEmpleado(listaEmpleados[indiceRecibido]);
-				retorno = OPERACION_EXITOSA;
+				if(listaEmpleados[i].isEmpty == OCUPADO)
+				{
+					imprimirFilaDeEmpleado(listaEmpleados[i], MOSTRAR_ID_NOMBRE_EMPLEADOS_DISPONIBLES);
+				}
 			}
 		}
 	}
 	return retorno;
 }
 
-/** \brief Imprime el contenido del array listaEmpleados[] recibido por parametro
+/** \brief Imprime el contenido del empleado recibido por parametro
+* \param Employee listaEmpleados[] - lista para imprimir
+* \param int len - largo del array
+* \return INT. 0 Si pudo operar correctamente
+* 			 -20 si no se encontraron datos asociados al ID indicado
+*/
+int printOneEmployee(Employee empleado)
+{
+	int retorno = NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO;
+
+	if(empleado.isEmpty == OCUPADO)
+	{
+		printf("\n\t\t<--Datos asociados al ID: < %d >-->\n", empleado.id);
+		imprimirEncabezadoDeTablaEmpleados(MOSTRAR_TODOS_LOS_DATOS_DEL_EMPLEADO);
+		imprimirFilaDeEmpleado(empleado, MOSTRAR_TODOS_LOS_DATOS_DEL_EMPLEADO);
+		retorno = OPERACION_EXITOSA;
+	}
+	return retorno;
+}
+
+/** \brief Imprime todo el contenido de un array listaEmpleados[] recibido por parametro
 * \param Employee* list - lista para imprimir
 * \param int len - largo del array
 * \return INT. 0 Si pudo operar correctamente
@@ -465,12 +551,12 @@ int printEmployees(Employee* list, int length)
 			retorno = OPERACION_EXITOSA;
 
 			printf("\n\t\t<--Mostrando lista con informacion de los empleados-->");
-			imprimirEncabezadoDeTablaEmpleados();
+			imprimirEncabezadoDeTablaEmpleados(MOSTRAR_TODOS_LOS_DATOS_DEL_EMPLEADO);
 			for(i = 0; i < length; i++)
 			{
-				if(list[i].isEmpty == 0)
+				if(list[i].isEmpty == OCUPADO)
 				{
-					imprimirFilaDeEmpleado(list[i]);
+					imprimirFilaDeEmpleado(list[i], MOSTRAR_TODOS_LOS_DATOS_DEL_EMPLEADO);
 				}
 			}
 		}
@@ -489,12 +575,12 @@ int printEmployees(Employee* list, int length)
 */
 int sortEmployees(Employee* list, int len, int order)
 {
-	int i;
 	int retornoApellido;
+	int i = 0;
 	int limite = len;
 	int banderaOrdenado = 1;
 	int retorno = PUNTERO_NULL;
-	int largoCadena = sizeof(list[0].lastName);
+	int largoCadenaApellido = sizeof(list[i].lastName);
 
 	if(list != NULL)
 	{
@@ -509,7 +595,7 @@ int sortEmployees(Employee* list, int len, int order)
 
 				for(i = 0; i < limite; i++)
 				{
-					retornoApellido = strncmp(list[i].lastName, list[i+1].lastName, largoCadena);
+					retornoApellido = strncmp(list[i].lastName, list[i+1].lastName, largoCadenaApellido);
 
 					if(order == 1)
 					{
@@ -529,38 +615,6 @@ int sortEmployees(Employee* list, int len, int order)
 					}
 				}
 			}while(banderaOrdenado == 0);
-		}
-	}
-	return retorno;
-}
-
-/** \brief Cambia la posicion de 2 empleados
-* \param Employee listaEmpleados [] - Lista de empleados
-* \param int i - Indice en el array, del empleado A
-* \param int i - Indice en el array, del empleado B
-* \return INT. 0 Si pudo operar correctamente
-* 			  -1 si la direccion de memoria del array es NULL
-* 			  -13 si el parametro i no es distinto del parametro j.
-* 			  -23 si el indice de i o j estan fuera del rango.
-*/
-static int swapEmpleados(Employee listaEmpleados[], int i, int j)
-{
-	int retorno = PUNTERO_NULL;
-	Employee auxiliar;
-
-	if(listaEmpleados != NULL)
-	{
-		retorno = I_O_J_ESTA_FUERA_DE_RANGO;
-		if((i >= 0 && i < MAXIMO_LEN) && (j >= 0 && j < MAXIMO_LEN))// i y j son indices, por eso van de 0 a < maximo
-		{
-			retorno = PARAMETRO_I_NO_ES_DISTINTO_DE_J;
-			if(i != j)
-			{
-				auxiliar = listaEmpleados[i];
-				listaEmpleados[i] = listaEmpleados[j];
-				listaEmpleados[j] = auxiliar;
-				retorno = OPERACION_EXITOSA;
-			}
 		}
 	}
 	return retorno;
@@ -626,9 +680,10 @@ int imprimirDatosDeSalario(Employee listaEmpleados[], int len)
 */
 int calcularEmpleadosQueSuperanSalarioPromedio(Employee listaEmpleados[], int len, float promedioSalario)
 {
-	int retorno = PUNTERO_NULL;
 	int i;
 	int contador=0;
+	int retorno = PUNTERO_NULL;
+
 	if(listaEmpleados != NULL)
 	{
 		retorno = LEN_INVALIDO;
@@ -640,7 +695,7 @@ int calcularEmpleadosQueSuperanSalarioPromedio(Employee listaEmpleados[], int le
 				retorno = NO_HAY_EMPLEADOSCARGADOS_EN_EL_SISTEMA;
 				for(i = 0; i < len; i++)
 				{
-					if(listaEmpleados[i].isEmpty == 0)
+					if(listaEmpleados[i].isEmpty == OCUPADO)
 					{
 						retorno = NINGUN_EMPLEADO_SUPERA_SALARIO_PROMEDIO;
 
@@ -687,7 +742,7 @@ int calcularSalarios(Employee listaEmpleados[], int len, float* pTotalSalarios, 
 			retorno = NO_HAY_EMPLEADOSCARGADOS_EN_EL_SISTEMA;
 			for(i = 0; i< len; i++)
 			{
-				if(listaEmpleados[i].isEmpty == 0)
+				if(listaEmpleados[i].isEmpty == OCUPADO)
 				{
 					acumuladorSalarios = acumuladorSalarios + listaEmpleados[i].salary;
 					contador++;
@@ -706,5 +761,3 @@ int calcularSalarios(Employee listaEmpleados[], int len, float* pTotalSalarios, 
 	}
 	return retorno;
 }
-
-

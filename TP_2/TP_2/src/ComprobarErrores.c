@@ -100,7 +100,7 @@ static void imprimirErrores(int codigoError)
 			pMensaje = "\n\t\t--No se encontraron datos asociados al ID indicado.--\n";
 			break;
 		case -21:
-			pMensaje = "\n\t\t--ERROR. El listado esta lleno. No se pueden agregar mas empleados.--\n";
+			pMensaje = "\n\t\t--ERROR. El listado esta lleno. No se pueden cargar mas empleados.--\n";
 			break;
 		case -22:
 			pMensaje = "\n\t\t--ERROR. No se pudo obtener una respuesta valida.--\n";
@@ -110,6 +110,9 @@ static void imprimirErrores(int codigoError)
 			break;
 		case -24:
 			pMensaje = "\n\t\t--ERROR. Error al intentar borrar espacios en blanco.--\n";
+			break;
+		case -25:
+			pMensaje = "\n\t\t--ERROR. No se pudo llevar a cabo ningun alta.--\n";
 			break;
 		default :
 			pMensaje = "\n\t\t--ERROR.--\n";

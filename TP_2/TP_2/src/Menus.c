@@ -58,7 +58,7 @@ void imprimirMenuSecundario(int opcionUno, int opcionDos)
 	switch(opcionUno)
 	{
 		case 0:
-			pMensaje = "\n\n\t\t<--Menu de Alta de datos-->";
+			pMensaje ="\n\n\t\t<--Menu de Alta de datos-->";
 			break;
 		case 1:
 			pMensaje ="\n\n\t\t<--Menu de modificacion de datos-->";
@@ -78,13 +78,13 @@ void imprimirMenuSecundario(int opcionUno, int opcionDos)
 			break;
 		case 1:
 			//Los Id arrancan en 1, por lo que se puede usar el '0' para volver atras.
-			pMensajeDos ="\n\n>>A continuacion, ingrese el Id del empleado que desee modificar (1-9999)\n<<o pulse '0' para volver atras";
+			pMensajeDos ="\n\n>>A continuacion, ingrese el Id del empleado que desee modificar\n<<o pulse '0' para volver atras";
 			break;
 		case 2:
 			pMensajeDos ="\n\n>>A continuacion indique el campo que desea modificar\n\t1 >>Nombre\n\t2 >>Apellido\n\t3 >>Salario \n\t4 >>Sector \n\t5 <<Atras";
 			break;
 		case 3:
-			pMensajeDos ="\n>>A continuacion ingrese el Id que desee dar de baja (1-9999)\n<<o pulse '0' para volver atras";
+			pMensajeDos ="\n>>A continuacion ingrese el Id que desee dar de baja\n<<o pulse '0' para volver atras";
 			break;
 		case 4:
 			pMensajeDos ="\nSeguro desea eliminar la informacion asociada a ese Id? \n\t1 >>Si\n\t2 <<Volver\n";
@@ -136,8 +136,10 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 	int banderaMenuOpciones;
 	int estadoOperacion;
 	int idIngresado;
+	int indiceDelId;
 	int retorno = PUNTERO_NULL;
-	int banderaMenuTitulo=1;
+	int banderaMenuTitulo = 1;
+
 	if(listaEmpleados != NULL)
 	{
 		retorno = LEN_INVALIDO;
@@ -149,6 +151,7 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 				banderaMenuOpciones = 1;
 				opcionElegida = 0;
 				imprimirMenuSecundario(banderaMenuTitulo, banderaMenuOpciones);
+				imprimirIdsDisponibles(listaEmpleados, len);
 				//Puede ingresar un numero entre 0 (atras) hasta 9999 (ids)
 				estadoOperacion = tomarID();
 				if(utn_comprobarEstadoDeOperacion(estadoOperacion))
@@ -157,21 +160,27 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 					if(opcionElegida > 0)
 					{
 						idIngresado = opcionElegida;
-						estadoOperacion = printOneEmployee(listaEmpleados, TAM_LISTA_EMPLEADOS, idIngresado);
+						//Rescato el ID dentro de "opcionElegida",
+						//porque la variable "opcionElegida" se continuara reutilizando y perdera el ID
+						estadoOperacion = findEmployeeById(listaEmpleados, len, idIngresado);
 						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 						{
+							indiceDelId = estadoOperacion;
+							//Rescato el Indice del Id, porque "estadoOperacion" se continuara reutilizando,
+							//y perdera el indice, y el indice lo necesito mantener para otras operaciones.
 							do
 							{
 								banderaMenuOpciones = 2;
+								printOneEmployee(listaEmpleados[indiceDelId]);
 								imprimirMenuSecundario(banderaMenuTitulo, banderaMenuOpciones);
 								estadoOperacion = ingreseUnaOpcion(&opcionElegida, 1,5);
 								if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida != MENU_MODIFICACION_ATRAS)
 								{
-									estadoOperacion = modificarEmpleado(listaEmpleados, len, idIngresado,  opcionElegida);
+									estadoOperacion = modificarEmpleado(&listaEmpleados[indiceDelId], opcionElegida);
 
 									if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 									{
-										estadoOperacion = printOneEmployee(listaEmpleados, TAM_LISTA_EMPLEADOS, idIngresado);
+										estadoOperacion = printOneEmployee(listaEmpleados[indiceDelId]);
 										if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 										{
 											printf("\n\n\t\t<-Modificacion exitosa!->\n");
@@ -213,12 +222,13 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 */
 int operarMenuBajas(Employee listaEmpleados[], int len)
 {
-	int retorno = PUNTERO_NULL;
 	int estadoOperacion;
 	int idIngresado;
+	int indiceId;
 	int banderaTituloMenu;
 	int banderaOpcionesMenu;
 	int opcionElegida;
+	int retorno = PUNTERO_NULL;
 
 	if(listaEmpleados != NULL)
 	{
@@ -231,6 +241,7 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 				banderaTituloMenu = 2;
 				banderaOpcionesMenu = 3;
 				imprimirMenuSecundario(banderaTituloMenu, banderaOpcionesMenu);
+				imprimirIdsDisponibles(listaEmpleados, len);
 
 				estadoOperacion = tomarID();
 				opcionElegida = estadoOperacion;
@@ -238,9 +249,12 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 				{
 					retorno = NO_SE_APLICARON_BAJAS;
 					idIngresado = estadoOperacion;
-					estadoOperacion = printOneEmployee(listaEmpleados, TAM_LISTA_EMPLEADOS, idIngresado);
+					estadoOperacion = findEmployeeById(listaEmpleados, len, idIngresado);
 					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 					{
+						indiceId = estadoOperacion;
+
+						printOneEmployee(listaEmpleados[indiceId]);
 						banderaTituloMenu = 2;
 						banderaOpcionesMenu = 4;
 						imprimirMenuSecundario(banderaTituloMenu, banderaOpcionesMenu);
@@ -262,5 +276,3 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 	}
 	return retorno;
 }
-
-

@@ -1,0 +1,44 @@
+/*
+ * ArrayEmployees.h
+ *
+ *  Created on: 5 oct 2021
+ *      Author: GONZALO
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "Inputs.h"
+#include "ComprobarErrores.h"
+
+#ifndef ARRAYEMPLOYEES_H_
+#define ARRAYEMPLOYEES_H_
+
+#define TAM 51
+
+struct
+{
+	int id;
+	char name[TAM];
+	char lastName[TAM];
+	float salary;
+	int sector;
+	int isEmpty;
+}typedef Employee;
+
+int initEmployees(Employee* list, int len);
+int addEmployees(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector);
+int tomarDatosEmpleados(Employee listaEmpleados[], int len);
+int findEmployeeById(Employee* list, int len,int id);
+int removeEmployee(Employee* list, int len, int id);
+int printEmployees(Employee* list, int length);
+int printOneEmployee(Employee listaEmpleados[], int len, int Id);
+int sortEmployees(Employee* list, int len, int order);
+int imprimirDatosDeSalario(Employee listaEmpleados[], int len);
+int calcularEmpleadosQueSuperanSalarioPromedio(Employee listaEmpleados[], int len, float promedioSalario);
+int calcularSalarios(Employee listaEmpleados[], int len, float* pTotalSalarios, float* pPromedioSalarios);
+int verificarSiHayEmpleados(Employee listaEmpleados[], int len);
+int campoAModificar(Employee* auxiliar,int opcion);
+int modificarEmpleado(Employee listaEmpleados[], int len, int id, int opcion);
+
+#endif /* ARRAYEMPLOYEES_H_ */
