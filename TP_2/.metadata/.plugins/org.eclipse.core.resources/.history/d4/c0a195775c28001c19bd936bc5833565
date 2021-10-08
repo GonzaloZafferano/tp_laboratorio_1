@@ -206,7 +206,6 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 								}
 								if(estadoOperacion == 0 && opcionElegida != MENU_MODIFICACION_CAMPOS_ATRAS)
 								{
-									opcionElegida = MENU_MODIFICACION_CONTINUAR_ATRAS;//Lo seteo en 2 (volver atras), en caso de que no ingrese nunca una opcion valida
 									imprimirMenuSecundario(MENU_MODIFICACION, MENU_MODIFICACION_CONTINUAR_MODIFICANDO_AL_EMPLEADO);
 									estadoOperacion = ingreseUnaOpcion(&opcionElegida, MENU_MODIFICACION_CONTINUAR,MENU_MODIFICACION_CONTINUAR_ATRAS);
 									utn_comprobarEstadoDeOperacion(estadoOperacion);

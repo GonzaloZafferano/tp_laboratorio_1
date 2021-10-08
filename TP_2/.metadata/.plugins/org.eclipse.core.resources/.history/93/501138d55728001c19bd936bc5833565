@@ -30,7 +30,6 @@
 #define LEN_INVALIDO -2
 #define NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID -12
 #define NO_SE_APLICARON_BAJAS -19
-#define NO_SE_PUDO_TOMAR_UN_DATO_VALIDO -22
 #define TAM_LISTA_EMPLEADOS 1000
 
 /*
@@ -206,7 +205,6 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 								}
 								if(estadoOperacion == 0 && opcionElegida != MENU_MODIFICACION_CAMPOS_ATRAS)
 								{
-									opcionElegida = MENU_MODIFICACION_CONTINUAR_ATRAS;//Lo seteo en 2 (volver atras), en caso de que no ingrese nunca una opcion valida
 									imprimirMenuSecundario(MENU_MODIFICACION, MENU_MODIFICACION_CONTINUAR_MODIFICANDO_AL_EMPLEADO);
 									estadoOperacion = ingreseUnaOpcion(&opcionElegida, MENU_MODIFICACION_CONTINUAR,MENU_MODIFICACION_CONTINUAR_ATRAS);
 									utn_comprobarEstadoDeOperacion(estadoOperacion);
@@ -260,7 +258,6 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 				estadoOperacion = tomarID();
 				opcionElegida = estadoOperacion;
 				if(utn_comprobarEstadoDeOperacion(estadoOperacion) && estadoOperacion != 0)
-				if(utn_comprobarEstadoDeOperacion(estadoOperacion)==1)
 				{
 					retorno = NO_SE_APLICARON_BAJAS;
 					idIngresado = estadoOperacion;
@@ -291,7 +288,7 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 						}
 					}
 				}
-			}while(opcionElegida == MENU_BAJAS_NO_ELIMINAR_Y_VOLVER || estadoOperacion == NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID || estadoOperacion == NO_SE_PUDO_TOMAR_UN_DATO_VALIDO);
+			}while(opcionElegida == MENU_BAJAS_NO_ELIMINAR_Y_VOLVER || estadoOperacion == NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID);
 		}
 	}
 	return retorno;
