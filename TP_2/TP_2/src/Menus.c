@@ -9,14 +9,27 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MENU_BAJAS_VOLVER 2
-#define MENU_MODIFICACION_ATRAS 5
+#define MENU_MODIFICACION_SALIR 0
+#define MENU_MODIFICACION 1
+#define	MENU_MODIFICACION_INGRESE_ID_EMPLEADO 1
+#define MENU_MODIFICACION_CAMPOS_A_MODIFICAR 2
+#define MENU_MODIFICACION_CONTINUAR_MODIFICANDO_AL_EMPLEADO 7
+#define MENU_MODIFICACION_CONTINUAR 1
+#define MENU_MODIFICACION_CONTINUAR_ATRAS 2
+#define MENU_MODIFICACION_CAMPOS_ATRAS 5
+#define MENU_CAMPOS_MINIMO 1
+#define MENU_CAMPOS_MAXIMO 5
+#define MENU_BAJAS 2
+#define MENU_BAJAS_INGRESE_ID 3
+#define MENU_BAJAS_ELIMINAR 1
+#define MENU_BAJAS_SEGURO_DESEA_ELIMINAR 4
+#define MENU_BAJAS_NO_ELIMINAR_Y_VOLVER 2
+#define PRESIONO_ATRAS 1
 #define OPERACION_EXITOSA 0
 #define PUNTERO_NULL -1
 #define LEN_INVALIDO -2
-#define PRESIONO_ATRAS 1
+#define NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID -12
 #define NO_SE_APLICARON_BAJAS -19
-#define NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO -20
 #define TAM_LISTA_EMPLEADOS 1000
 
 /*
@@ -31,7 +44,7 @@ void imprimirMenuPrincipal(void)
 
 	if(banderaMenu)
 	{
-		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n\n";
+		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n";
 	}
 	else
 	{
@@ -69,6 +82,9 @@ void imprimirMenuSecundario(int opcionUno, int opcionDos)
 		case 3:
 			pMensaje ="\n\n\t\t<--Menu para muestra de informacion-->";
 			break;
+		case 4:
+			pMensaje ="\n\n\t\t<--Menu salida de programa-->";
+			break;
 	}
 
 	switch(opcionDos)
@@ -98,6 +114,9 @@ void imprimirMenuSecundario(int opcionUno, int opcionDos)
 		case 7:
 			pMensajeDos = "\nDesea continuar modificando al empleado seleccionado?\n\t1 >>Si\n\t2 <<Atras";
 			break;
+		case 8:
+			pMensajeDos = "\nDesea salir del programa?\n\t1 >>Si\n\t2 <<Atras";
+			break;
 	}
 	printf("%s %s", pMensaje, pMensajeDos);
 }
@@ -115,7 +134,7 @@ int esPosibleOperar(int bandera)
 
 	if(bandera == 0)
 	{
-		printf("\n\t\t<--Un momento! no hay empleados cargados para operar\n\t\tIngrese un empleado con la opcion 1.-->\n");
+		printf("\n\t\t<--Un momento! No hay empleados cargados para operar.\n\t\tIngrese un empleado con la opcion 1.-->\n");
 		retorno = FALSE;
 	}
 	return retorno;
@@ -133,31 +152,28 @@ int esPosibleOperar(int bandera)
 int operarMenuModificacion(Employee listaEmpleados[], int len)
 {
 	int opcionElegida;
-	int banderaMenuOpciones;
 	int estadoOperacion;
 	int idIngresado;
 	int indiceDelId;
 	int retorno = PUNTERO_NULL;
-	int banderaMenuTitulo = 1;
 
 	if(listaEmpleados != NULL)
 	{
 		retorno = LEN_INVALIDO;
-		if(len >0 && len <= TAM_LISTA_EMPLEADOS)
+		if(len > 0 && len <= TAM_LISTA_EMPLEADOS)
 		{
 			retorno = PRESIONO_ATRAS;
 			do
 			{
-				banderaMenuOpciones = 1;
-				opcionElegida = 0;
-				imprimirMenuSecundario(banderaMenuTitulo, banderaMenuOpciones);
+				opcionElegida = MENU_MODIFICACION_SALIR;
+				imprimirMenuSecundario(MENU_MODIFICACION, MENU_MODIFICACION_INGRESE_ID_EMPLEADO);
 				imprimirIdsDisponibles(listaEmpleados, len);
 				//Puede ingresar un numero entre 0 (atras) hasta 9999 (ids)
 				estadoOperacion = tomarID();
 				if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 				{
 					opcionElegida = estadoOperacion;
-					if(opcionElegida > 0)
+					if(opcionElegida > MENU_MODIFICACION_SALIR)
 					{
 						idIngresado = opcionElegida;
 						//Rescato el ID dentro de "opcionElegida",
@@ -170,11 +186,10 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 							//y perdera el indice, y el indice lo necesito mantener para otras operaciones.
 							do
 							{
-								banderaMenuOpciones = 2;
 								printOneEmployee(listaEmpleados[indiceDelId]);
-								imprimirMenuSecundario(banderaMenuTitulo, banderaMenuOpciones);
-								estadoOperacion = ingreseUnaOpcion(&opcionElegida, 1,5);
-								if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida != MENU_MODIFICACION_ATRAS)
+								imprimirMenuSecundario(MENU_MODIFICACION, MENU_MODIFICACION_CAMPOS_A_MODIFICAR);
+								estadoOperacion = ingreseUnaOpcion(&opcionElegida, MENU_CAMPOS_MINIMO,MENU_CAMPOS_MAXIMO);
+								if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida != MENU_MODIFICACION_CAMPOS_ATRAS)
 								{
 									estadoOperacion = modificarEmpleado(&listaEmpleados[indiceDelId], opcionElegida);
 
@@ -184,27 +199,28 @@ int operarMenuModificacion(Employee listaEmpleados[], int len)
 										if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 										{
 											printf("\n\n\t\t<-Modificacion exitosa!->\n");
-											banderaMenuOpciones = 1;
 											retorno = OPERACION_EXITOSA;
 										}
 									}
 								}
-								if(estadoOperacion == 0 && opcionElegida != MENU_MODIFICACION_ATRAS)
+								if(estadoOperacion == 0 && opcionElegida != MENU_MODIFICACION_CAMPOS_ATRAS)
 								{
-									banderaMenuOpciones = 7;
-									imprimirMenuSecundario(banderaMenuTitulo, banderaMenuOpciones);
-									estadoOperacion = ingreseUnaOpcion(&opcionElegida, 1,2);
+									imprimirMenuSecundario(MENU_MODIFICACION, MENU_MODIFICACION_CONTINUAR_MODIFICANDO_AL_EMPLEADO);
+									estadoOperacion = ingreseUnaOpcion(&opcionElegida, MENU_MODIFICACION_CONTINUAR,MENU_MODIFICACION_CONTINUAR_ATRAS);
 									utn_comprobarEstadoDeOperacion(estadoOperacion);
 								}
-								if(estadoOperacion<0)
+								else
 								{
-									opcionElegida = 2;
+									if(estadoOperacion < 0)
+									{
+										opcionElegida = MENU_MODIFICACION_CONTINUAR_ATRAS;
+									}
 								}
-							}while(opcionElegida == 1);
+							}while(opcionElegida == MENU_MODIFICACION_CONTINUAR);
 						}
 					}
 				}
-			}while(opcionElegida > 0);
+			}while(opcionElegida > MENU_MODIFICACION_SALIR);
 		}
 	}
 	return retorno;
@@ -225,8 +241,6 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 	int estadoOperacion;
 	int idIngresado;
 	int indiceId;
-	int banderaTituloMenu;
-	int banderaOpcionesMenu;
 	int opcionElegida;
 	int retorno = PUNTERO_NULL;
 
@@ -238,9 +252,7 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 			do
 			{
 				retorno = PRESIONO_ATRAS;//Retorna 1 si decide volver <<atras
-				banderaTituloMenu = 2;
-				banderaOpcionesMenu = 3;
-				imprimirMenuSecundario(banderaTituloMenu, banderaOpcionesMenu);
+				imprimirMenuSecundario(MENU_BAJAS, MENU_BAJAS_INGRESE_ID);
 				imprimirIdsDisponibles(listaEmpleados, len);
 
 				estadoOperacion = tomarID();
@@ -255,12 +267,10 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 						indiceId = estadoOperacion;
 
 						printOneEmployee(listaEmpleados[indiceId]);
-						banderaTituloMenu = 2;
-						banderaOpcionesMenu = 4;
-						imprimirMenuSecundario(banderaTituloMenu, banderaOpcionesMenu);
-						estadoOperacion = ingreseUnaOpcion(&opcionElegida, 1,2);
+						imprimirMenuSecundario(MENU_BAJAS, MENU_BAJAS_SEGURO_DESEA_ELIMINAR);
+						estadoOperacion = ingreseUnaOpcion(&opcionElegida, MENU_BAJAS_ELIMINAR,MENU_BAJAS_NO_ELIMINAR_Y_VOLVER);
 
-						if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida == 1)
+						if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida == MENU_BAJAS_ELIMINAR)
 						{
 							estadoOperacion = removeEmployee(listaEmpleados, TAM_LISTA_EMPLEADOS, idIngresado);
 							if(utn_comprobarEstadoDeOperacion(estadoOperacion))
@@ -269,9 +279,16 @@ int operarMenuBajas(Employee listaEmpleados[], int len)
 								retorno = OPERACION_EXITOSA;
 							}
 						}
+						else
+						{
+							if(opcionElegida == MENU_BAJAS_NO_ELIMINAR_Y_VOLVER)
+							{
+								printf("\n\t\t<-No se realizo la baja->");
+							}
+						}
 					}
 				}
-			}while(opcionElegida == MENU_BAJAS_VOLVER || estadoOperacion == NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO);
+			}while(opcionElegida == MENU_BAJAS_NO_ELIMINAR_Y_VOLVER || estadoOperacion == NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID);
 		}
 	}
 	return retorno;

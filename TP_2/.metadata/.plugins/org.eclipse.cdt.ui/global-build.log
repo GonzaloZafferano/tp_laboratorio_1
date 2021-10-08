@@ -469,3 +469,506 @@ Info: Internal Builder is used for build
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
 gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
 Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+15:18:31 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+15:21:28 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+12:59:13 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+..\src\Inputs.c: In function 'darFormatoMayusculaMinuscula':
+..\src\Inputs.c:161:6: warning: unused variable 'banderaHayEspacios' [-Wunused-variable]
+  161 |  int banderaHayEspacios = 0;
+      |      ^~~~~~~~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:59:43 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+13:07:25 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+13:07:32 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+13:16:26 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+17:52:24 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+00:54:20 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+00:54:28 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+01:16:00 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+..\src\ArrayEmployees.c: In function 'imprimirDatosDeSalario':
+..\src\ArrayEmployees.c:652:23: warning: implicit declaration of function 'calcularEImprimirEmpleadosQueSuperanSalarioPromedio'; did you mean 'calcularEmpleadosQueSuperanSalarioPromedio'? [-Wimplicit-function-declaration]
+  652 |     estadoOperacion = calcularEImprimirEmpleadosQueSuperanSalarioPromedio(listaEmpleados,len, promedioSalarios);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                       calcularEmpleadosQueSuperanSalarioPromedio
+..\src\ArrayEmployees.c:658:36: warning: format '%d' expects a matching 'int' argument [-Wformat=]
+  658 |      printf("\n$%19.4f  $%19.4f %44d\n", totalSalarios, promedioSalarios);
+      |                                 ~~~^
+      |                                    |
+      |                                    int
+..\src\ArrayEmployees.c: At top level:
+..\src\ArrayEmployees.c:688:5: error: conflicting types for 'calcularEImprimirEmpleadosQueSuperanSalarioPromedio'
+  688 | int calcularEImprimirEmpleadosQueSuperanSalarioPromedio(Employee listaEmpleados[], int len, float promedioSalario)
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\ArrayEmployees.c:689:1: note: an argument type that has a default promotion can't match an empty parameter name list declaration
+  689 | {
+      | ^
+..\src\ArrayEmployees.c:652:23: note: previous implicit declaration of 'calcularEImprimirEmpleadosQueSuperanSalarioPromedio' was here
+  652 |     estadoOperacion = calcularEImprimirEmpleadosQueSuperanSalarioPromedio(listaEmpleados,len, promedioSalarios);
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+01:25:52 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+..\src\ArrayEmployees.c: In function 'imprimirDatosDeSalario':
+..\src\ArrayEmployees.c:656:35: warning: format '%d' expects a matching 'int' argument [-Wformat=]
+  656 |     printf("\n$%19.4f  $%19.4f %44d\n", totalSalarios, promedioSalarios);
+      |                                ~~~^
+      |                                   |
+      |                                   int
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+01:26:11 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+01:30:55 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+01:40:15 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+01:42:41 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+01:43:27 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+01:44:05 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+01:44:44 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+08:53:46 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+10:36:07 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+..\src\TP_2.c: In function 'main':
+..\src\TP_2.c:46:6: warning: unused variable 'banderaMenuSecundarioOpcion' [-Wunused-variable]
+   46 |  int banderaMenuSecundarioOpcion = 0;
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\TP_2.c:45:6: warning: unused variable 'banderaMenuSecundarioTitulo' [-Wunused-variable]
+   45 |  int banderaMenuSecundarioTitulo = 0;
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\TP_2.c:44:6: warning: unused variable 'opcionMaximo' [-Wunused-variable]
+   44 |  int opcionMaximo;
+      |      ^~~~~~~~~~~~
+..\src\TP_2.c:43:6: warning: unused variable 'opcionMinimo' [-Wunused-variable]
+   43 |  int opcionMinimo;
+      |      ^~~~~~~~~~~~
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuModificacion':
+..\src\Menus.c:154:6: warning: unused variable 'banderaMenuTitulo' [-Wunused-variable]
+  154 |  int banderaMenuTitulo = 1;
+      |      ^~~~~~~~~~~~~~~~~
+..\src\Menus.c: In function 'operarMenuBajas':
+..\src\Menus.c:242:6: warning: unused variable 'banderaOpcionesMenu' [-Wunused-variable]
+  242 |  int banderaOpcionesMenu;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:241:6: warning: unused variable 'banderaTituloMenu' [-Wunused-variable]
+  241 |  int banderaTituloMenu;
+      |      ^~~~~~~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+10:36:21 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+10:44:36 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuModificacion':
+..\src\Menus.c:154:6: warning: unused variable 'banderaMenuTitulo' [-Wunused-variable]
+  154 |  int banderaMenuTitulo = 1;
+      |      ^~~~~~~~~~~~~~~~~
+..\src\Menus.c: In function 'operarMenuBajas':
+..\src\Menus.c:242:6: warning: unused variable 'banderaOpcionesMenu' [-Wunused-variable]
+  242 |  int banderaOpcionesMenu;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:241:6: warning: unused variable 'banderaTituloMenu' [-Wunused-variable]
+  241 |  int banderaTituloMenu;
+      |      ^~~~~~~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+10:48:01 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuModificacion':
+..\src\Menus.c:154:6: warning: unused variable 'banderaMenuTitulo' [-Wunused-variable]
+  154 |  int banderaMenuTitulo = 1;
+      |      ^~~~~~~~~~~~~~~~~
+..\src\Menus.c: In function 'operarMenuBajas':
+..\src\Menus.c:242:6: warning: unused variable 'banderaOpcionesMenu' [-Wunused-variable]
+  242 |  int banderaOpcionesMenu;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:241:6: warning: unused variable 'banderaTituloMenu' [-Wunused-variable]
+  241 |  int banderaTituloMenu;
+      |      ^~~~~~~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+10:51:52 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuModificacion':
+..\src\Menus.c:154:6: warning: unused variable 'banderaMenuTitulo' [-Wunused-variable]
+  154 |  int banderaMenuTitulo = 1;
+      |      ^~~~~~~~~~~~~~~~~
+..\src\Menus.c:149:6: warning: variable 'banderaMenuOpciones' set but not used [-Wunused-but-set-variable]
+  149 |  int banderaMenuOpciones;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c: In function 'operarMenuBajas':
+..\src\Menus.c:239:6: warning: unused variable 'banderaOpcionesMenu' [-Wunused-variable]
+  239 |  int banderaOpcionesMenu;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:238:6: warning: unused variable 'banderaTituloMenu' [-Wunused-variable]
+  238 |  int banderaTituloMenu;
+      |      ^~~~~~~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+10:51:58 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+11:03:32 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+..\src\TP_2.c: In function 'main':
+..\src\TP_2.c:49:6: warning: unused variable 'banderaMenuSecundarioOpcion' [-Wunused-variable]
+   49 |  int banderaMenuSecundarioOpcion;
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\TP_2.c:48:6: warning: unused variable 'banderaMenuSecundarioTitulo' [-Wunused-variable]
+   48 |  int banderaMenuSecundarioTitulo;
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\TP_2.c:47:6: warning: unused variable 'opcionMaximo' [-Wunused-variable]
+   47 |  int opcionMaximo;
+      |      ^~~~~~~~~~~~
+..\src\TP_2.c:46:6: warning: unused variable 'opcionMinimo' [-Wunused-variable]
+   46 |  int opcionMinimo;
+      |      ^~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:04:08 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:04:12 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+11:04:22 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:04:31 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuModificacion':
+..\src\Menus.c:154:6: warning: unused variable 'banderaMenuTitulo' [-Wunused-variable]
+  154 |  int banderaMenuTitulo = 1;
+      |      ^~~~~~~~~~~~~~~~~
+..\src\Menus.c:149:6: warning: variable 'banderaMenuOpciones' set but not used [-Wunused-but-set-variable]
+  149 |  int banderaMenuOpciones;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c: In function 'operarMenuBajas':
+..\src\Menus.c:239:6: warning: unused variable 'banderaOpcionesMenu' [-Wunused-variable]
+  239 |  int banderaOpcionesMenu;
+      |      ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:238:6: warning: unused variable 'banderaTituloMenu' [-Wunused-variable]
+  238 |  int banderaTituloMenu;
+      |      ^~~~~~~~~~~~~~~~~
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:05:01 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuModificacion':
+..\src\Menus.c:196:12: error: 'banderaMenuOpciones' undeclared (first use in this function)
+  196 |            banderaMenuOpciones = MENU_MODIFICACION_INGRESE_ID_EMPLEADO;
+      |            ^~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:196:12: note: each undeclared identifier is reported only once for each function it appears in
+11:10:32 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+11:45:39 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+11:45:44 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+11:47:21 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+11:56:06 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+12:01:56 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+..\src\Menus.c: In function 'operarMenuBajas':
+..\src\Menus.c:285:82: error: 'NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO' undeclared (first use in this function)
+  285 |    }while(opcionElegida == MENU_BAJAS_NO_ELIMINAR_Y_VOLVER || estadoOperacion == NO_SE_ENCONTRARON_DATOS_ASOCIADOS_AL_ID_INDICADO);
+      |                                                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+..\src\Menus.c:285:82: note: each undeclared identifier is reported only once for each function it appears in
+12:03:11 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:04:36 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+12:06:59 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+12:07:53 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+12:12:14 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:14:18 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+12:26:00 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+12:26:05 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:34:10 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+12:35:31 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:36:24 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+12:36:26 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:38:38 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:39:30 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+12:45:24 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+12:45:30 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+12:46:28 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+12:50:37 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+12:52:49 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+12:53:47 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+12:53:49 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+12:57:35 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+13:18:51 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+13:21:37 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+c:/mingw/bin/../lib/gcc/mingw32/9.2.0/../../../../mingw32/bin/ld.exe: cannot open output file TP_2.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+13:21:41 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2

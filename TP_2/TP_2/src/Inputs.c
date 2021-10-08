@@ -9,6 +9,7 @@
 
 #define TRUE 1
 #define FALSE 0
+#define ID_MAXIMO 9999
 #define LEN_BUFFER_STRING 51
 #define LEN_BUFFER_INT 16
 #define LEN_BUFFER_FLOAT 51
@@ -40,7 +41,7 @@ static int esNumeroFloat (char cadena [], int largo);
 static int esNombreOApellido (char cadena [], int largo);
 static int swapCaracteres(char plistaCaracteres[], int i, int j);
 static int darFormatoMayusculaMinuscula(char pNombre[], int len);
-static int colocarMayusculaDespuesDeUnEspacio(char pCadena[], int len);
+static int cambiarTabsPorEspacios(char pCadena[], int len);
 static int borrarEspacios(char pCadena[], int len);
 static int borrarEspaciosIniciales(char pCadena[], int len, int indiceInicial);
 static int borrarEspaciosExtrasIntermedios(char pCadena[], int len);
@@ -146,8 +147,8 @@ static int esNombreOApellido (char pCadena [], int largo)
 }
 
 /**
-* \brief Recibe una cadena de caracteres (previamente validada con solo letras)
-*        Convierte la primer letra de una palabra en Mayuscula y el resto en minusculas
+* \brief Recibe una cadena de caracteres (previamente validada con solo letras y espacios permitidos)
+*        Convierte la primer letra de cada palabra en Mayuscula y el resto en minusculas.
 * \param char pNombre[] - Array de caracteres
 * \param int len - largo del Array
 * \return retorna INT. 0 si esta todo OK.
@@ -158,7 +159,6 @@ static int darFormatoMayusculaMinuscula(char pNombre[], int len)
 {
 	int largo;
 	int i=0;
-	int banderaHayEspacios = 0;
 	int retorno = PUNTERO_NULL;
 
 	if(pNombre !=NULL)
@@ -169,14 +169,14 @@ static int darFormatoMayusculaMinuscula(char pNombre[], int len)
 			largo = strnlen(pNombre, len);
 			retorno = OPERACION_EXITOSA;
 
-			if(pNombre[i] > 90) //Primer letra siempre en mayuscula
+			if(pNombre[i] > 90) //Primer letra SIEMPRE en mayuscula
 			{
 				pNombre[i] = pNombre[i] - 32;
 			}
 
 			for(i = 1; i < largo; i++)//Arranca en el segundo caracter. El primero es siempre mayusculas.
 			{
-				if(pNombre[i] != 32) //Si no es un espacio en blanco, opera
+				if(pNombre[i] != 32) //Si NO es un espacio en blanco, opera
 				{
 					if(pNombre[i] < 97)
 					{
@@ -185,47 +185,13 @@ static int darFormatoMayusculaMinuscula(char pNombre[], int len)
 				}
 				else
 				{
-					//Si es espacio en blanco, activa la bandera.
-					banderaHayEspacios = 1;
-				}
-			}
-
-			if(banderaHayEspacios == 1)//como hay un espacio, significa que hay mas de un nombre
-			{
-				colocarMayusculaDespuesDeUnEspacio(pNombre, len);
-			}
-		}
-	}
-	return retorno;
-}
-
-/**
-* \brief Recibe un array de caracteres ya validado (solo letras, con espacios extras borrados)
-*        Coloca una mayuscula despues de un espacio.
-* \param char pCadena[] - Cadena de caracteres para operar.
-* \param int len - Largo de la cadena de caracteres.
-* \return retorna INT. 0 si pudo operar correctamente,
-*  		  retorna -1 si el puntero apunta a una direccion de memoria NULL,
-*         retorna -2 si el largo total del array es invalido.
-*/
-static int colocarMayusculaDespuesDeUnEspacio(char pCadena[], int len)
-{
-	int i=0;
-	int retorno = PUNTERO_NULL;
-	if(pCadena != NULL)
-	{
-		retorno = LEN_INVALIDO;
-		if(len > 0 && len <= LEN_BUFFER_STRING)
-		{
-			retorno = OPERACION_EXITOSA;
-			for(i = 0; i < len; i++)
-			{
-				//Si hay un espacio en blanco, coloca una mayuscula en la proxima posicion.
-				if(pCadena[i] == 32)
-				{
-					//Ya esta validado previamente que solo hay un espacio entre palabras,
-					//por lo que despues de un espacio siempre hay una letra.
-					pCadena[i+1] = pCadena[i+1] - 32;
+					//Si hay un espacio en blanco, evalua la siguiente posicion para colocar la mayuscula
+					//Si lo hace, incrementa 'i' para que la proxima vuelta se saltee esta mayuscula.
+					if(pNombre[i+1] > 90)
+					{
+						pNombre[i+1] = pNombre[i+1] - 32;
+						i++;
+					}
 				}
 			}
 		}
@@ -234,8 +200,43 @@ static int colocarMayusculaDespuesDeUnEspacio(char pCadena[], int len)
 }
 
 /*
+* \brief Reemplaza los tabs que se encuentre por espacios en blanco.
+* \param cha pCadena[] - Array de caracteres que contiene la cadena.
+* \param int len - largo del array
+* \return Retorna INT. 0 Si se opero correctamente,
+*         retorna -1 si la direccion de memoria del array es NULL,
+*         retorna -2 si el len es invalido
+*/
+static int cambiarTabsPorEspacios(char pCadena[], int len)
+{
+	int i;
+	int largo;
+	int retorno = PUNTERO_NULL;
+
+	if(pCadena != NULL)
+	{
+		retorno = LEN_INVALIDO;
+		if(len > 0 && len <= LEN_BUFFER_STRING)
+		{
+			largo = strnlen(pCadena, len);
+
+			retorno = OPERACION_EXITOSA;
+
+			for(i=0; i < largo; i++)
+			{
+				 if(pCadena[i] == '\t')
+				 {
+					 pCadena[i] = 32; //32 para ' ' (espacio en blanco)
+				 }
+			}
+		}
+	}
+	return retorno;
+}
+
+/*
 * \brief Borra los espacios en blanco (al inicio de la cadena, al final y los extras en el medio)
-* 		 Se apoya en 3 funciones para operar correctamente.
+* 		 Se apoya en 4 funciones para operar correctamente.
 * \param cha pCadena[] - Array de caracteres que contiene la cadena.
 * \param int len - largo del array
 * \return Retorna INT. 0 Si se opero correctamente,
@@ -253,13 +254,17 @@ static int borrarEspacios(char pCadena[], int len)
 		if(len > 0 && len <= LEN_BUFFER_STRING)
 		{
 			retorno = ERROR_AL_INTENTAR_BORRAR_ESPACIOS;
-			if(borrarEspaciosIniciales(pCadena, len,i) == 0)
+
+			if(cambiarTabsPorEspacios(pCadena, len) == 0)
 			{
-				if(borrarEspaciosExtrasIntermedios(pCadena, len) == 0)
+				if(borrarEspaciosIniciales(pCadena, len,i) == 0)
 				{
-					if(borrarEspaciosFinales(pCadena, len) == 0)
+					if(borrarEspaciosExtrasIntermedios(pCadena, len) == 0)
 					{
-						retorno = OPERACION_EXITOSA;
+						if(borrarEspaciosFinales(pCadena, len) == 0)
+						{
+							retorno = OPERACION_EXITOSA;
+						}
 					}
 				}
 			}
@@ -607,8 +612,8 @@ int utn_getInt(int* pNumero, char* pMensaje, char* pMensajeError, int minimo, in
     int i;
     int bufferInt;
     int estadoOperacion;
-    char bufferCadenaAuxiliar[LEN_BUFFER_INT]; //UN INT SOPORTA COMO MAXIMO 10 DIGITOS, con 16 caracteres le sobra.
     int banderaExito = 0; //Asumo que es falso (no hubo exito).
+    char bufferCadenaAuxiliar[LEN_BUFFER_INT];
     int retorno = PUNTERO_NULL; //Asumo que hay problema con la direccion de memoria.
 
     if(pNumero != NULL && pMensaje != NULL && pMensajeError != NULL)
@@ -623,12 +628,12 @@ int utn_getInt(int* pNumero, char* pMensaje, char* pMensajeError, int minimo, in
 			{
 				for(i = 0; i <= reintentos; i++)
 				{
-					estadoOperacion = myGets(bufferCadenaAuxiliar,sizeof(bufferCadenaAuxiliar), pMensaje);
+					estadoOperacion = myGets(bufferCadenaAuxiliar, LEN_BUFFER_INT, pMensaje);
 
 					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 					{
 						//Si entro al IF, el usuario ingreso correctamente texto. Ahora valido que sea numero Entero.
-						estadoOperacion = esNumeroEntero(bufferCadenaAuxiliar, sizeof(bufferCadenaAuxiliar));
+						estadoOperacion = esNumeroEntero(bufferCadenaAuxiliar, LEN_BUFFER_INT);
 						utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 						//No puedo usar la funcion que comprueba el estado de operaciones
@@ -693,10 +698,10 @@ int utn_getInt(int* pNumero, char* pMensaje, char* pMensajeError, int minimo, in
 int utn_getFloat(float* pNumero, char* pMensaje, char* pMensajeError, int minimo, int maximo, int reintentos)
 {
     int i;
-    float bufferFloat;
     int estadoOperacion;
-    char bufferCadenaAuxiliar[LEN_BUFFER_FLOAT];
+    float bufferFloat;
     int banderaExito = 0; //Asumo que es falso (no hubo exito).
+    char bufferCadenaAuxiliar[LEN_BUFFER_FLOAT];
     int retorno = PUNTERO_NULL; //Asumo que hay problema con la direccion de memoria.
 
     if(pNumero != NULL && pMensaje != NULL && pMensajeError != NULL)
@@ -711,12 +716,12 @@ int utn_getFloat(float* pNumero, char* pMensaje, char* pMensajeError, int minimo
 			{
 				for(i = 0; i <= reintentos; i++)
 				{
-					estadoOperacion = myGets(bufferCadenaAuxiliar,sizeof(bufferCadenaAuxiliar), pMensaje);
+					estadoOperacion = myGets(bufferCadenaAuxiliar,LEN_BUFFER_FLOAT, pMensaje);
 
 					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 					{
 						//Si entro al IF, el usuario ingreso correctamente texto. Ahora valido que sea numero Float.
-						estadoOperacion = esNumeroFloat(bufferCadenaAuxiliar, sizeof(bufferCadenaAuxiliar));
+						estadoOperacion = esNumeroFloat(bufferCadenaAuxiliar, LEN_BUFFER_FLOAT);
 						utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 						//No puedo usar la funcion que comprueba el estado de operaciones
@@ -783,36 +788,34 @@ int utn_getNombreOApellido(char pCadena[], int largo, char* pMensaje, char* pMen
 {
     int i;
     int estadoOperacion;
-    char bufferCadenaAuxiliar[LEN_BUFFER_STRING];
-    int largoBufferCadenaAuxiliar;
     int banderaExito = 0; //Asumo que es falso (no hubo exito).
+    char bufferCadenaAuxiliar[LEN_BUFFER_STRING];
     int retorno = PUNTERO_NULL; //Asumo que hay problema con la direccion de memoria.
 
     if(pCadena != NULL && pMensaje != NULL && pMensajeError != NULL)
 	{
     	retorno = LEN_INVALIDO;
-    	if(largo > 0)
+    	if(largo > 0 && largo <= LEN_BUFFER_STRING)
     	{
 			retorno = REINTENTOS_NEGATIVOS;//Los reintentos son negativos
 
 			if(reintentos >= 0)
 			{
-				largoBufferCadenaAuxiliar = sizeof(bufferCadenaAuxiliar);
 				for(i = 0; i <= reintentos; i++)
 				{
-					estadoOperacion = myGets(bufferCadenaAuxiliar,largoBufferCadenaAuxiliar, pMensaje);
+					estadoOperacion = myGets(bufferCadenaAuxiliar,LEN_BUFFER_STRING, pMensaje);
 
 					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 					{
 						//Si entro al IF, el usuario ingreso correctamente texto. Ahora valido que sea numero Entero.
-						borrarEspacios(bufferCadenaAuxiliar, largoBufferCadenaAuxiliar);
+						borrarEspacios(bufferCadenaAuxiliar, LEN_BUFFER_STRING);
 
-						estadoOperacion = esNombreOApellido(bufferCadenaAuxiliar, largoBufferCadenaAuxiliar);
+						estadoOperacion = esNombreOApellido(bufferCadenaAuxiliar, LEN_BUFFER_STRING);
 						utn_comprobarEstadoDeOperacion(estadoOperacion);
 
 						if(estadoOperacion == 1)
 						{
-							estadoOperacion = darFormatoMayusculaMinuscula(bufferCadenaAuxiliar, largoBufferCadenaAuxiliar);
+							estadoOperacion = darFormatoMayusculaMinuscula(bufferCadenaAuxiliar, LEN_BUFFER_STRING);
 							if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 							{
 								strncpy(pCadena, bufferCadenaAuxiliar, largo);
@@ -856,12 +859,12 @@ int utn_getNombreOApellido(char pCadena[], int largo, char* pMensaje, char* pMen
 */
 int tomarID(void)
 {
-	int retorno = ID_FUERA_DE_RANGO;
-	int estadoOperacion;
 	int id;
+	int estadoOperacion;
+	int retorno = ID_FUERA_DE_RANGO;
 
 	//0 para salir. Id valido 1-9999
-	estadoOperacion = utn_getInt(&id, "\nIngrese Id", "Error, dato invalido", 0, 9999, 2);
+	estadoOperacion = utn_getInt(&id, "\nIngrese Id", "Error, Id invalido.", 0, ID_MAXIMO, REINTENTOS);
 	if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 	{
 		retorno = id;
@@ -882,15 +885,16 @@ int tomarID(void)
 */
 int ingreseUnaOpcion(int* opcion, int minimo, int maximo)
 {
-	int retorno = PUNTERO_NULL;
 	int estadoOperacion;
+	int retorno = PUNTERO_NULL;
+
 	if(opcion != NULL)
 	{
 		retorno = MINIMO_ES_MAYOR_QUE_EL_MAXIMO;
 		if(minimo <= maximo)
 		{
 			retorno = NO_SE_PUDO_OBTENER_UNA_RESPUESTA_VALIDA;
-			 estadoOperacion = utn_getInt(opcion, "\nIngrese una opcion", "Error. Dato invalido", minimo, maximo, REINTENTOS);
+			 estadoOperacion = utn_getInt(opcion, "\nIngrese una opcion", "Error. Opcion invalida.", minimo, maximo, REINTENTOS);
 			 if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 			 {
 				 retorno = OPERACION_EXITOSA;
@@ -899,4 +903,3 @@ int ingreseUnaOpcion(int* opcion, int minimo, int maximo)
 	}
 	return retorno;
 }
-
