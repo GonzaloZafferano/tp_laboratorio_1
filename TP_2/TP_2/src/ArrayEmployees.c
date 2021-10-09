@@ -405,6 +405,7 @@ int modificarEmpleado(Employee* pEmpleado, int opcion)
 
 	if(pEmpleado != NULL)
 	{
+		retorno = NO_SE_APLICARON_CAMBIOS_SOBRE_EL_EMPLEADO;
 		estadoOperacion = campoAModificar(&auxiliar, opcion);
 		if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 		{
@@ -423,13 +424,7 @@ int modificarEmpleado(Employee* pEmpleado, int opcion)
 					pEmpleado->sector = auxiliar.sector;
 					break;
 			}
-
-		retorno = OPERACION_EXITOSA;
-		}
-
-		if(estadoOperacion <0)
-		{
-			retorno = NO_SE_APLICARON_CAMBIOS_SOBRE_EL_EMPLEADO;
+			retorno = OPERACION_EXITOSA;
 		}
 	}
 	return retorno;

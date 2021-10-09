@@ -1251,3 +1251,14 @@ Info: Nothing to build for TP_2
 Info: Nothing to build for TP_2
 Info: Nothing to build for TP_2
 Info: Nothing to build for TP_2
+20:45:07 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+20:48:27 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
