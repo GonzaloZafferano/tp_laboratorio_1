@@ -5,11 +5,11 @@
  *      Author: GONZALO
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #ifndef COMPROBARERRORES_H_
 #define COMPROBARERRORES_H_
+
+#include <stdio.h>
+#include <stdlib.h>
 
 int utn_comprobarEstadoDeOperacion(int estadoOperacion);
 

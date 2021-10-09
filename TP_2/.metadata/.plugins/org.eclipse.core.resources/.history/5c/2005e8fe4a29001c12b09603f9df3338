@@ -1,0 +1,65 @@
+/*
+ * Menus.h
+ *
+ *  Created on: 5 oct 2021
+ *      Author: GONZALO
+ */
+
+
+#ifndef MENUS_H_
+#define MENUS_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "Inputs.h"
+#include "ComprobarErrores.h"
+#include "ArrayEmployees.h"
+
+/*
+* \brief Imprime el menu principal.
+* \param int banderaMenu - Bandera que indica el titulo que debe imprimir el menu.
+* \return Retorna VOID.
+*/
+void imprimirMenuPrincipal(void);
+
+/*
+* \brief Imprime un menu secundario, segun la opcion recibida por parametro.
+* \param int opcion - entero que indica el titulo del menu a imprimir
+* \param int opcionDos - entero que indica el listado de opciones a imprimir
+* \return retorna VOID.
+*/
+void imprimirMenuSecundario(int opcionUno, int opcionDos);
+
+/*
+* \brief Evalua si es posible realizar una operacion. Si es posible, no realiza acciones.
+*        Si no es posible, informa el motivo.
+* \param int bandera - Valor que identifica la posibilidad de realizar una operacion.
+* \return retorna un INT. 1 si es posible realizar la operacion en base a la bandera recibida.
+* 		  retorna 0 si la operacion no puede ser realizada.
+*/
+int esPosibleOperar(int bandera);
+
+/*
+* \brief Opera el menu de modificaciones (opcion 2)
+* \param Employee listaEmpleados - Lista de empleados
+* \param int len - largo del array
+* \return retorna INT. 0 si esta todo OK.
+* 		  retorna  1 si se decide volver <<atras, cancelando la modificacion.
+*         retorna -1 si la direccion de memoria del array es NULL.
+*         retorna -2 si el len es invalido.
+*/
+int operarMenuModificacion(Employee listaEmpleados[], int len);
+
+/*
+* \brief Opera el menu de bajas (opcion 3)
+* \param Employee listaEmpleados - Lista de empleados
+* \param int len - largo del array
+* \return retorna INT. 0 si se completo la baja de forma correcta.
+* 		  retorna  1 si se decidio volver <<atras, cancelando la baja.
+*         retorna -1 si la direccion de memoria del array es NULL.
+*         retorna -2 si el len es invalido.
+*         retorna-19 si no se aplicaron bajas en el sistema
+*/
+int operarMenuBajas(Employee listaEmpleados[], int len);
+
+#endif /* MENUS_H_ */

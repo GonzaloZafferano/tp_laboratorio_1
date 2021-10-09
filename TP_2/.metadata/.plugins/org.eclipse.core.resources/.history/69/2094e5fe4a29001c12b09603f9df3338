@@ -1,0 +1,25 @@
+/*
+ * ComprobarErrores.h
+ *
+ *  Created on: 5 oct 2021
+ *      Author: GONZALO
+ */
+
+
+#ifndef COMPROBARERRORES_H_
+#define COMPROBARERRORES_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+* \brief Evalua el exito de una operacion. Si hay exito, no realiza acciones.
+*        Ante una falla (estado menor que 0), se apoya en otra funcion imprimirErrores (int codigoError),
+*        enviandole el estado recibido de la operacion (que almacena el codigo de error).
+* \param int estadoOperacion - Valor que identifica el estado (exito o falla) de una operacion.
+* \return retorna un INT. 1 si la operacion recibida fue exitosa.
+* 		  retorna 0 si la operacion recibida no fue exitosa.
+*/
+int utn_comprobarEstadoDeOperacion(int estadoOperacion);
+
+#endif /* COMPROBARERRORES_H_ */

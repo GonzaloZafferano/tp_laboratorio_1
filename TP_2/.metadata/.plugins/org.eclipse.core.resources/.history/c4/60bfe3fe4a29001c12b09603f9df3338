@@ -1,0 +1,208 @@
+/*
+ * ArrayEmployees.h
+ *
+ *  Created on: 5 oct 2021
+ *      Author: GONZALO
+ */
+
+
+#ifndef ARRAYEMPLOYEES_H_
+#define ARRAYEMPLOYEES_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "Inputs.h"
+#include "ComprobarErrores.h"
+
+#define TAM 51
+
+struct
+{
+	int id;
+	char name[TAM];
+	char lastName[TAM];
+	float salary;
+	int sector;
+	int isEmpty;
+}typedef Employee;
+
+/**
+* \brief Inicializa la bandera 'IsEmpty' en 1 en todas las posiciones,
+*          indicando que todas las posiciones del array estan vacias.
+* \param Employee* list - Array de tipo Employee
+* \param int len - largo del Array
+* \return retorna INT. 0 si esta todo OK.
+*         retorna -1 si la direccion de memoria del array es NULL.
+*         retorna -2 si el len es invalido.
+*/
+int initEmployees(Employee* list, int len);
+
+/*
+* \brief Evalua si hay empleados en la lista (ante una eliminacion o falta de carga).
+* \param Employee listaEmpleados[] - lista de todos los empleados
+* \param int len - largo del array
+* \return Retorna INT. 1 si hay empleados.
+* 		  Retorna  0 Si no hay empleados.
+* 		  Retorna -1 si la direccion de memoria es NULL.
+* 		  Retorna -2 si hay el largo del array es invalido
+*/
+int verificarSiHayEmpleados(Employee listaEmpleados[], int len);
+
+/** \brief Agrega en un elemento de la lista existente de tipo Employees los valores recibidos por parametro,
+ *         en la primer posicion vacia que este disponible.
+* \param Employee* list - Array de tipo Employee
+* \param int len - largo del array
+* \param int id - id del empleado
+* \param char name[] - Nombre del empleado
+* \param char lastName[] - Apellido del empleado
+* \param float salary - Salario del empleado
+* \param int sector - Sector del empleado
+* \return Retorna INT. 0 Si se opero correctamente,
+*          retorna -1 si la direccion de memoria del array es NULL,
+*          retorna -2 si el len es invalido
+*          retorna -11 si el ID esta fuera de rango
+*          retorno -25 si no se pudo dar el alta.
+*/
+int addEmployees(Employee* list, int len, int id, char name[],char lastName[],float salary,int sector);
+
+/** \brief Busca un indice libre que pueda ser cargado de datos.
+* \param Employee listaEmpleados[] - Array de tipo Employee
+* \param int len - largo del array
+* \return Retorna INT. 0 o un numero positivo, que es el indice libre encontrado
+*          retorna -1 si la direccion de memoria del array es NULL,
+*          retorna -2 si el len es invalido
+*          retorno -21 si todos los espacios estan ocupados.
+*/
+int buscarIndiceLibre(Employee listaEmpleados[], int len);
+
+/** \brief Toma los datos de un empleado para posteriormente enviarselos a
+ * 			la funcion addEmployee() quien se encargara de cargarlo en el sistema.
+* \param Employee listadoEmpleados[] - Array de tipo Employee
+* \param int len - largo del array
+* \return Retorna INT. 0 Si se opero correctamente,
+*          retorna -1 si la direccion de memoria del array es NULL,
+*          retorna -2 si el len es invalido
+*          retorna -14 si no se pudieron cargar correctamente todos los campos.
+*/
+int tomarDatosEmpleados(Employee listaEmpleados[], int len);
+
+/** \brief Encuentra un empleado por su Id, y retorna el indice del array donde se encuentra.
+* \param Employee* list - lista de todos los empleados
+* \param int len - largo del array
+* \param int Id - Id del empleado que se desea encontrar
+* \return Retorna INT. Retorna el indice del empleado (0 a 999)
+* 		  Retorna -1 si la direccion de memoria es NULL.
+* 		  Retorna -2 si hay el largo del array es invalido
+* 		  Retorna -11 si el ID es invalido
+* 		  retorna -12 si el Id es valido, pero no tiene ningun empleado cargado.
+*/
+int findEmployeeById(Employee* list, int len,int id);
+
+/*
+* \brief Toma el nuevo dato que se le quiere otorgar a un campo elegido que recibe por parametro.
+* \param Employee* pAuxiliar - auxiliar donde se cargara el dato
+* \param int opcion - opcion que se cargara
+* \return Retorna INT. 0 Si se opero correctamente,
+*         retorna -14 si no se pudieron tomar los datos correctamente.
+*/
+int campoAModificar(Employee* pAuxiliar, int opcion);
+
+/*
+* \brief Modifica un campo del empleado indicado por Id.
+* \param Employee* pEmpleado - Empleado que se quiere modificar
+* \param int opcion - Opcion que indica que elemento se modificara.
+* \return Retorna INT. 0 Si se opero correctamente,
+*          retorna -1 si la direccion de memoria del array es NULL,
+*          retorna -15 si no se pudo realizar la modificacion del empleado.
+*/
+int modificarEmpleado(Employee* pEmpleado, int opcion);
+
+/** \brief Elimina a un empleado por su Id (se setea la bandera "isEmpty" en 1)
+* \param Employee* list - Lista de empleados
+* \param int len - largo del array
+* \param int id - Id del empleado que se eliminara
+* \return Retorna INT. Retorna 0 si la eliminacion fue exitosa.
+* 		  Retorna -1 si la direccion de memoria es NULL.
+* 		  Retorna -2 si hay el largo del array es invalido
+* 		  Retorna -11 si el ID es invalido
+* 		  retorna -19 si no se aplicaron bajas en el sistema (porque el ID no tiene datos).
+*/
+int removeEmployee(Employee* list, int len, int id);
+
+/** \brief Imprime los campos Id, nombre y apellido del array listaEmpleados[] recibido por parametro
+* \param Employee  listaEmpleados[] - lista para imprimir
+* \param int len - largo del array
+* \return INT. 0 Si pudo operar correctamente
+* 			  -1 si la direccion de memoria del array es NULL
+* 			  -2 si el largo del array es invalido
+*/
+int imprimirIdsDisponibles(Employee listaEmpleados[], int len);
+
+/** \brief Imprime el contenido del empleado recibido por parametro
+* \param Employee empleado - empleado que se imprime
+* \return INT. 0 Si pudo operar correctamente
+* 			 -20 si no se encontraron datos asociados al ID indicado
+*/
+int printOneEmployee(Employee empleado);
+
+/** \brief Imprime todo el contenido de un array listaEmpleados[] recibido por parametro
+* \param Employee* list - lista para imprimir
+* \param int len - largo del array
+* \return INT. 0 Si pudo operar correctamente
+* 			  -1 si la direccion de memoria del array es NULL
+* 			  -2 si el largo del array es invalido
+*/
+int printEmployees(Employee* list, int length);
+
+/** \brief Ordena los elementos del array de empleados por apellido y sector.
+ *         El argumento Orden se utiliza para indica orden Ascendente (1) o descendente (0)
+* \param Employee* list - Lista de empleados
+* \param int len - largo del array
+* \param int order - [1] Orden Ascendente - [0] orden Descendente
+* \return INT. 0 Si pudo operar correctamente
+* 			  -1 si la direccion de memoria del array es NULL
+* 			  -2 si el largo del array es invalido
+*/
+int sortEmployees(Employee* list, int len, int order);
+
+/*
+* \brief Imprime los datos relacionados con los salarios. Se apoya en 2 funciones.
+* \param Employee listaEmpleados[] - lista de todos los empleados
+* \param int len - largo del array
+* \return Retorna 0 Si Ok.
+* 		  Retorna -1 si la direccion de memoria es NULL.
+* 		  Retorna -2 si hay el largo del array es invalido
+* 		  retorna -18 si por un error no pudo imprimir los datos relacionados con los salarios
+*/
+int imprimirDatosDeSalario(Employee listaEmpleados[], int len);
+
+/*
+* \brief Calcula, imprime y retorna la cantidad de empleados que superan el salario promedio.
+* \param Employee listaEmpleados[] - lista de todos los empleados
+* \param int len - largo del array
+* \param float promedioSalario - Puntero a variable promedio
+* \return Retorna  Numero positivo que representa la cantidad de empleados que superan el salario promedio.
+* 		  Retorna 0 si ningun empleado supera el salario promedio
+* 		  (porque se eliminaron los empleados que lo superaban o solo hay un empleado cargado)
+* 		  Retorna -1 si la direccion de memoria es NULL.
+* 		  Retorna -2 si hay el largo del array es invalido
+* 		  retorna -16 si no hay empleados cargados en el sistema
+* 		  retorna -17 si no se ha calculado el promedio de los salarios.
+*/
+int calcularEImprimirEmpleadosQueSuperanSalarioPromedio(Employee listaEmpleados[], int len, float promedioSalario);
+
+/*
+* \brief Calcula el total de los salarios y el promedio de salarios
+* \param Employee listaEmpleados[] - lista de todos los empleados
+* \param int len - largo del array
+* \param float* pTotalSalarios - Puntero a variable totalSalarios
+* \param float* pPromedioSalarios - Puntero a variable promedio
+* \return Retorna  0 Si esta OK.
+* 		  Retorna -1 si la direccion de memoria es NULL.
+* 		  Retorna -2 si hay el largo del array es invalido
+* 		  retorna -16 si no hay empleados cargados en el sistema
+*/
+int calcularSalarios(Employee listaEmpleados[], int len, float* pTotalSalarios, float* pPromedioSalarios);
+
+#endif /* ARRAYEMPLOYEES_H_ */

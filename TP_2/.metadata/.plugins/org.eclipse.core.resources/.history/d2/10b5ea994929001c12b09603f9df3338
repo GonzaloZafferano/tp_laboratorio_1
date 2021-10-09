@@ -1,0 +1,89 @@
+/*
+ * Inputs.h
+ *
+ *  Created on: 5 oct 2021
+ *      Author: GONZALO
+ */
+
+
+#ifndef INPUTS_H_
+#define INPUTS_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "ComprobarErrores.h"
+
+/**
+* \brief Obtiene un numero INT del usuario, verificando que sea valido.
+* \param int pNumero - Direccion de memoria de la variable INT donde almacenara el numero ingresado por el usuario, una vez validado.
+* \param int largo - Largo de la cadena de caracteres.
+* \param char* pMensaje - Mensaje informativo al usuario
+* \param char* pMensajeError - Mensaje en caso de ingresar un dato invalido
+* \param int reintentos - Reintentos en caso de ingresar datos invalidos
+* \return retorna INT. 0 si pudo operar correctamente
+*         retorna -1 si el puntero es NULL,
+*         retorna -4 si se quedo sin reintentos
+*         retorna -5 si la cantidad de reintentos es Invalida (negativa)
+*         retorna -6 si hay un error con los maximos y minimos
+*         retorna -7 si hay un error con la funcion mygets().
+*         retorna -8 si hay un error con la funcion esNumeroEntero()
+*/
+int utn_getInt(int* pNumero, char* pMensaje, char* pMensajeError, int minimo, int maximo, int reintentos);
+
+/**
+* \brief Obtiene un numero FLOAT del usuario, verificando que sea valido.
+* \param float pNumero - Direccion de memoria de la variable FLOAT donde almacenara el numero ingresado por el usuario, una vez validado.
+* \param int largo - Largo de la cadena de caracteres.
+* \param char* pMensaje - Mensaje informativo al usuario
+* \param char* pMensajeError - Mensaje en caso de ingresar un dato invalido
+* \param int reintentos - Reintentos en caso de ingresar datos invalidos
+* \return retorna INT. 0 si pudo operar correctamente
+*         retorna -1 si el puntero es NULL,
+*         retorna -4 si se quedo sin reintentos
+*         retorna -5 si la cantidad de reintentos es Invalida (negativa)
+*         retorna -6 si hay un error con los maximos y minimos
+*         retorna -7 si hay un error con la funcion mygets().
+*         retorna -10 si hay un error con la funcion esNumeroFloat()
+*/
+int utn_getFloat(float* pNumero, char* pMensaje, char* pMensajeError, int minimo, int maximo, int reintentos);
+
+/**
+* \brief Obtiene un nombre o apellido del usuario. Evalua si es valido.
+* \param char pCadena[] - Direccion de memoria de la variable CHAR donde almacenara el dato ingresado por el usuario, una vez validado.
+* \param int largo - Largo de la cadena de caracteres.
+* \param char* pMensaje - Mensaje informativo al usuario
+* \param char* pMensajeError - Mensaje en caso de ingresar un dato invalido
+* \param int reintentos - Reintentos en caso de ingresar datos invalidos
+* \return retorna INT. 0 si pudo operar correctamente
+*         retorna -1 si el puntero es NULL,
+*         retorna -2 si la longitud del array es negativa o 0.
+*         retorna -4 si se quedo sin reintentos
+*         retorna -5 si la cantidad de reintentos es Invalida (negativa)
+*         retorna -7 si hay un error con la funcion mygets().
+*         retorna -9 si hay un error con la funcion esNombreOApellido()
+*/
+int utn_getNombreOApellido(char pCadena[], int largo, char* pMensaje, char* pMensajeError, int reintentos);
+
+/*
+* \brief Toma el Id del empleado con el que se quiere operar.
+* \param VOID -
+* \return Retorna INT. Retorna un numero positivo que es el ID ingresado por el usuario,
+*         retorna -11 si no se pudo tomar el dato del Id.
+*/
+int tomarID(void);
+
+/*
+* \brief Solicita el ingreso de una opcion al usuario. Requiere maximo y minimo.
+* \param int* opcion - retorna a traves de este parametro la opcion seleccionada
+* \param int minimo - minimo valor de la opcion
+* \param int maximo - maximo valor de la opcion
+* \return retorna INT. Retorna un numero positivo que representa la opcion seleccionada.
+* 		  retorna   0 si esta OK.
+* 		  retorn   -1 si el puntero apunta a una direccion de memoria NULL
+*         retorna  -6 si el minimo es mayor que el maximo.
+*         retorna -22 si no se pudo obtener una respuesta valida.
+*/
+int ingreseUnaOpcion(int* opcion, int minimo, int maximo);
+
+#endif /* INPUTS_H_ */

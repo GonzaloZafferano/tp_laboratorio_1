@@ -13,7 +13,6 @@
 #define DESORDENADO 0
 #define ORDEN_ASCENDENTE 1
 #define MAXIMO_LEN 1000
-#define MAXIMO_ID 9999
 #define SECTOR_MINIMO 1
 #define SECTOR_MAXIMO 10
 #define SALARIO_MINIMO 10000
@@ -59,7 +58,7 @@ static int generadorDeIds(void)
 }
 
 /** \brief Imprime los encabezados de la tabla de datos.
-* \param VOID -
+* \param int opcion - opcion que determina el encabezado que se imprime
 * \return VOID
 */
 static void imprimirEncabezadoDeTablaEmpleados(int opcion)
@@ -78,6 +77,7 @@ static void imprimirEncabezadoDeTablaEmpleados(int opcion)
 /** \brief Imprime los datos de un empleado ya validado previamente.
  * 		   (Id, nombre, apellido, salario, sector).
 * \param Employee empleado - Empleado cuyos datos se quieren imprimir
+* \param int opcion - opcion que determina los datos que se imprimen del empleado
 * \return VOID
 */
 static void imprimirFilaDeEmpleado(Employee empleado, int opcion)
@@ -213,10 +213,7 @@ int addEmployees(Employee* list, int len, int id, char name[],char lastName[],fl
 		if(len > 0 && len <= MAXIMO_LEN)
 		{
 			retorno = ID_FUERA_DE_RANGO;
-			//Si bien el tope de empleados es 1.000, al ID se le coloca un tope en 10.000 porque
-			//se tiene en cuenta la baja de empleados (con la baja no pierden el ID porque es acumulativo)
-			//Entonces, la carga de nuevos empleados tomara el siguiente ID.
-			if(id > 0 && id <= MAXIMO_ID)
+			if(id > 0)
 			{
 				retorno = NO_SE_CARGO_NINGUN_ALTA;
 				indiceLibre = buscarIndiceLibre(list, len);
@@ -268,28 +265,29 @@ int buscarIndiceLibre(Employee listaEmpleados[], int len)
 	return retorno;
 }
 
-
 /** \brief Toma los datos de un empleado para posteriormente enviarselos a
  * 			la funcion addEmployee() quien se encargara de cargarlo en el sistema.
 * \param Employee listadoEmpleados[] - Array de tipo Employee
 * \param int len - largo del array
+* \param int* idMaximo - puntero a variable idMaximo, para cargar en ella el ultimo ID generado
 * \return Retorna INT. 0 Si se opero correctamente,
 *          retorna -1 si la direccion de memoria del array es NULL,
 *          retorna -2 si el len es invalido
 *          retorna -14 si no se pudieron cargar correctamente todos los campos.
 */
-int tomarDatosEmpleados(Employee listaEmpleados[], int len)
+int tomarDatosEmpleados(Employee listaEmpleados[], int len, int* idMaximo)
 {
 	Employee auxiliar;
 	int estadoOperacion;
 	int iDGenerado;
 	int retorno = PUNTERO_NULL;
 
-	if(listaEmpleados != NULL)
+	if(listaEmpleados != NULL && idMaximo != NULL)
 	{
 		retorno = LEN_INVALIDO;
 		if(len > 0 && len <= MAXIMO_LEN)
 		{
+			retorno = NO_SE_CARGARON_TODOS_LOS_CAMPOS;
 			estadoOperacion = utn_getNombreOApellido(auxiliar.name, sizeof(auxiliar.name), "Ingrese el nombre", "Error, dato invalido!", REINTENTOS);
 			if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 			{
@@ -303,6 +301,7 @@ int tomarDatosEmpleados(Employee listaEmpleados[], int len)
 						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 						{
 							iDGenerado = generadorDeIds();
+							*idMaximo = iDGenerado;
 							estadoOperacion = addEmployees(listaEmpleados, len, iDGenerado, auxiliar.name, auxiliar.lastName, auxiliar.salary, auxiliar.sector);
 							if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 							{
@@ -311,11 +310,6 @@ int tomarDatosEmpleados(Employee listaEmpleados[], int len)
 						}
 					}
 				}
-			}
-
-			if(estadoOperacion != OPERACION_EXITOSA)
-			{
-				retorno = NO_SE_CARGARON_TODOS_LOS_CAMPOS;
 			}
 		}
 	}
@@ -344,15 +338,12 @@ int findEmployeeById(Employee* list, int len,int id)
 		{
 			retorno = ID_FUERA_DE_RANGO;
 
-			//Si bien el tope de empleados es 1.000, al ID se le coloca un tope en 10.000 porque
-			//se tiene en cuenta la baja de empleados (con la baja no pierden el ID porque es acumulativo)
-			//Entonces, la carga de nuevos empleados tomara el siguiente ID.
-			if(id >0 && id <= MAXIMO_ID)
+			if(id >0)
 			{
 				retorno = NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID;
 				for(i = 0; i< len ; i++)
 				{
-					if(list[i].isEmpty == OCUPADO && list[i].id == id)
+					if(list[i].id == id && list[i].isEmpty == OCUPADO)
 					{
 						retorno = i;
 						break;
@@ -371,23 +362,23 @@ int findEmployeeById(Employee* list, int len,int id)
 * \return Retorna INT. 0 Si se opero correctamente,
 *         retorna -14 si no se pudieron tomar los datos correctamente.
 */
-int campoAModificar(Employee* auxiliar, int opcion)
+int campoAModificar(Employee* pAuxiliar, int opcion)
 {
 	int estadoOperacion;
 	int retorno = NO_SE_CARGARON_TODOS_LOS_CAMPOS;
 	switch(opcion)
 	{
 		case 1:
-			estadoOperacion = utn_getNombreOApellido(auxiliar->name, sizeof(auxiliar->name), "Ingrese el nuevo nombre", "Dato invalido!", REINTENTOS);
+			estadoOperacion = utn_getNombreOApellido(pAuxiliar->name, sizeof(pAuxiliar->name), "Ingrese el nuevo nombre", "Dato invalido!", REINTENTOS);
 			break;
 		case 2:
-			estadoOperacion = utn_getNombreOApellido(auxiliar->lastName, sizeof(auxiliar->lastName), "Ingrese el nuevo apellido", "Dato invalido!", REINTENTOS);
+			estadoOperacion = utn_getNombreOApellido(pAuxiliar->lastName, sizeof(pAuxiliar->lastName), "Ingrese el nuevo apellido", "Dato invalido!", REINTENTOS);
 			break;
 		case 3:
-			estadoOperacion = utn_getFloat(&auxiliar->salary, "Ingrese el nuevo salario (10000 - 500000)", "Error, dato invalido!", SALARIO_MINIMO, SALARIO_MAXIMO, REINTENTOS);
+			estadoOperacion = utn_getFloat(&pAuxiliar->salary, "Ingrese el nuevo salario (10000 - 500000)", "Error, dato invalido!", SALARIO_MINIMO, SALARIO_MAXIMO, REINTENTOS);
 			break;
 		case 4:
-			estadoOperacion = utn_getInt(&auxiliar->sector, "Ingrese el nuevo sector (1-10)", "Error, dato invalido!", SECTOR_MINIMO, SECTOR_MAXIMO, REINTENTOS);
+			estadoOperacion = utn_getInt(&pAuxiliar->sector, "Ingrese el nuevo sector (1-10)", "Error, dato invalido!", SECTOR_MINIMO, SECTOR_MAXIMO, REINTENTOS);
 			break;
 	}
 
@@ -399,22 +390,20 @@ int campoAModificar(Employee* auxiliar, int opcion)
 }
 
 /*
-* \brief Modifica un campo del empleado indicado por Id.
-* \param Employee listadoEmpleados[] - Array de tipo Employee
-* \param int len - largo del array
-* \param int id - id del empleado
+* \brief Modifica al empleado indicado por Id.
+* \param Employee* pEmpleado - Empleado que se quiere modificar
 * \param int opcion - Opcion que indica que elemento se modificara.
 * \return Retorna INT. 0 Si se opero correctamente,
 *          retorna -1 si la direccion de memoria del array es NULL,
 *          retorna -15 si no se pudo realizar la modificacion del empleado.
 */
-int modificarEmpleado(Employee* empleado, int opcion)
+int modificarEmpleado(Employee* pEmpleado, int opcion)
 {
 	Employee auxiliar;
 	int estadoOperacion;
 	int retorno = PUNTERO_NULL;
 
-	if(empleado != NULL)
+	if(pEmpleado != NULL)
 	{
 		estadoOperacion = campoAModificar(&auxiliar, opcion);
 		if(utn_comprobarEstadoDeOperacion(estadoOperacion))
@@ -422,16 +411,16 @@ int modificarEmpleado(Employee* empleado, int opcion)
 			switch(opcion)
 			{
 				case 1:
-					strncpy(empleado->name, auxiliar.name, sizeof(empleado->name));
+					strncpy(pEmpleado->name, auxiliar.name, sizeof(pEmpleado->name));
 					break;
 				case 2:
-					strncpy(empleado->lastName, auxiliar.lastName, sizeof(empleado->lastName));
+					strncpy(pEmpleado->lastName, auxiliar.lastName, sizeof(pEmpleado->lastName));
 					break;
 				case 3:
-					empleado->salary = auxiliar.salary;
+					pEmpleado->salary = auxiliar.salary;
 					break;
 				case 4:
-					empleado->sector = auxiliar.sector;
+					pEmpleado->sector = auxiliar.sector;
 					break;
 			}
 
@@ -467,7 +456,7 @@ int removeEmployee(Employee* list, int len, int id)
 		if(len > 0 && len <= MAXIMO_LEN)
 		{
 			retorno = ID_FUERA_DE_RANGO;
-			if(id >0 && id <= MAXIMO_ID)
+			if(id >0)
 			{
 				retorno = NO_SE_APLICARON_BAJAS;
 
@@ -514,8 +503,7 @@ int imprimirIdsDisponibles(Employee listaEmpleados[], int len)
 }
 
 /** \brief Imprime el contenido del empleado recibido por parametro
-* \param Employee listaEmpleados[] - lista para imprimir
-* \param int len - largo del array
+* \param Employee empleado - empleado que se imprime
 * \return INT. 0 Si pudo operar correctamente
 * 			 -20 si no se encontraron datos asociados al ID indicado
 */
@@ -592,8 +580,8 @@ int sortEmployees(Employee* list, int len, int order)
 			retorno = OPERACION_EXITOSA;
 			do
 			{
-				banderaOrdenado = ORDENADO; //Asumimos que esta todo ordenado
-				limite = limite - 1; //VOY REDUCIENDO EL LIMITE EN CADA VUELTA, asi no toma la ultima posicion que YA TIENE EL MAYOR O MENOR
+				banderaOrdenado = ORDENADO;
+				limite = limite - 1;
 
 				for(i = 0; i < limite; i++)
 				{
@@ -649,7 +637,7 @@ int imprimirDatosDeSalario(Employee listaEmpleados[], int len)
 				printf("\n\n\t\t<--Mostrando datos relacionados con salarios-->\n%20s %21s","Total de salarios", "Promedio Salarios");
 				printf("\n$%19.4f  $%19.4f\n", totalSalarios, promedioSalarios);
 
-				printf("\n\t\t<--Mostrando lista de empleados que superan el salario promedio-->");
+				printf("\n\t\t<--Mostrando lista de empleados que <superan> el salario promedio-->");
 				imprimirEncabezadoDeTablaEmpleados(MOSTRAR_TODOS_LOS_DATOS_DEL_EMPLEADO);
 
 				estadoOperacion = calcularEImprimirEmpleadosQueSuperanSalarioPromedio(listaEmpleados,len, promedioSalarios);
