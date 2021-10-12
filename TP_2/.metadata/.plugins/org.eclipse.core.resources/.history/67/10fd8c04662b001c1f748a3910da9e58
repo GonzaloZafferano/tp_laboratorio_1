@@ -45,7 +45,7 @@ void imprimirMenuPrincipal(void)
 
 	if(banderaMenu)
 	{
-		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n\n";
+		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n";
 	}
 	else
 	{

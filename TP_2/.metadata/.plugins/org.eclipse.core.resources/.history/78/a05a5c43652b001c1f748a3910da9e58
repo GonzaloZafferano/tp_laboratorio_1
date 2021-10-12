@@ -45,17 +45,18 @@ void imprimirMenuPrincipal(void)
 
 	if(banderaMenu)
 	{
-		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n\n";
+		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n";
 	}
 	else
 	{
-		pMensaje = "\n\t<--Bienvenido al sistema de carga de datos de Empleados-->\n\n";
+		pMensaje = "\n\t<--Bienvenido al sistema de carga de datos de Empleados-->\n\n"
+				"\t\t<--Menu Principal-->";
 		banderaMenu = 1;
 	}
 
 	printf("%s", pMensaje);
 
-	printf("\t\t<--Menu Principal-->\n1 >>Alta de personal\n2 >>Modificar\n3 >>Baja de personal\n4 >>Informar\n5 <<Salir");
+	printf("\n1 >>Alta de personal\n2 >>Modificar\n3 >>Baja de personal\n4 >>Informar\n5 <<Salir");
 }
 
 /*
@@ -260,6 +261,7 @@ int operarMenuBajas(Employee listaEmpleados[], int len, int idMaximo)
 				estadoOperacion = tomarID(idMaximo);
 				opcionElegida = estadoOperacion;
 				if(utn_comprobarEstadoDeOperacion(estadoOperacion) && estadoOperacion != 0)
+				if(utn_comprobarEstadoDeOperacion(estadoOperacion)==1)
 				{
 					retorno = NO_SE_APLICARON_BAJAS;
 					idIngresado = estadoOperacion;
