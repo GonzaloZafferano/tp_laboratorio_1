@@ -9,23 +9,14 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MENU_ALTAS 0
-#define MENU_ALTAS_COMPLETAR_CAMPOS 0
-#define SE_PUEDE_OPERAR_BAJA_MOD_MUESTRA 1
-#define MENU_ALTAS_DAR_UNA_ALTA 1
-#define MENU_ALTAS_MINIMO 1
-#define MENU_ALTAS_MAXIMO 2
-#define MENU_ALTAS_ATRAS 2
-#define MENU_ALTAS_DESEA_OTRA_ALTA_MAS 9
-#define MENU_ALTAS_DESEA_DAR_ALTA 10
 #define MENU_MODIFICACION_SALIR 0
 #define MENU_MODIFICACION 1
 #define	MENU_MODIFICACION_INGRESE_ID_EMPLEADO 1
-#define MENU_MODIFICACION_CONTINUAR 1
 #define MENU_MODIFICACION_CAMPOS_A_MODIFICAR 2
+#define MENU_MODIFICACION_CONTINUAR_MODIFICANDO_AL_EMPLEADO 7
+#define MENU_MODIFICACION_CONTINUAR 1
 #define MENU_MODIFICACION_CONTINUAR_ATRAS 2
 #define MENU_MODIFICACION_CAMPOS_ATRAS 5
-#define MENU_MODIFICACION_CONTINUAR_MODIFICANDO_AL_EMPLEADO 7
 #define MENU_CAMPOS_MINIMO 1
 #define MENU_CAMPOS_MAXIMO 5
 #define MENU_BAJAS 2
@@ -44,7 +35,6 @@
 #define PUNTERO_NULL -1
 #define LEN_INVALIDO -2
 #define NO_HAY_EMPLEADOS_CARGADOS_CON_ESE_ID -12
-#define NO_SE_PUDIERON_TOMAR_DATOS_CORRECTAMENTE -14
 #define NO_SE_APLICARON_BAJAS -19
 #define NO_SE_PUDO_TOMAR_UN_DATO_VALIDO -22
 #define TAM_LISTA_EMPLEADOS 1000
@@ -107,13 +97,14 @@ void imprimirMenuSecundario(int opcionUno, int opcionDos)
 	switch(opcionDos)
 	{
 		case 0:
-			pMensajeDos="\n>>A continuacion, complete los campos con los datos solicitados\n";
+			pMensajeDos="\n\n>>A continuacion, complete los campos con los datos solicitados\n";
 			break;
 		case 1:
-			pMensajeDos ="\n>>A continuacion, ingrese el Id del empleado que desee modificar\n<<o pulse '0' para volver atras";
+			//Los Id arrancan en 1, por lo que se puede usar el '0' para volver atras.
+			pMensajeDos ="\n\n>>A continuacion, ingrese el Id del empleado que desee modificar\n<<o pulse '0' para volver atras";
 			break;
 		case 2:
-			pMensajeDos ="\n>>A continuacion indique el campo que desea modificar\n\t1 >>Nombre\n\t2 >>Apellido\n\t3 >>Salario \n\t4 >>Sector \n\t5 <<Atras";
+			pMensajeDos ="\n\n>>A continuacion indique el campo que desea modificar\n\t1 >>Nombre\n\t2 >>Apellido\n\t3 >>Salario \n\t4 >>Sector \n\t5 <<Atras";
 			break;
 		case 3:
 			pMensajeDos ="\n>>A continuacion ingrese el Id que desee dar de baja\n<<o pulse '0' para volver atras";
@@ -136,12 +127,6 @@ void imprimirMenuSecundario(int opcionUno, int opcionDos)
 		case 8:
 			pMensajeDos = "\nDesea salir del programa?\n\t1 >>Si\n\t2 <<Atras";
 			break;
-		case 9:
-			pMensajeDos = "\nDesea continuar con otra alta?\n\t1 >>Si\n\t2 <<Atras";
-			break;
-		case 10:
-			pMensajeDos = "\nDesea dar una alta?\n\t1 >>Si\n\t2 <<Atras";
-			break;
 	}
 	printf("%s %s", pMensaje, pMensajeDos);
 }
@@ -161,68 +146,6 @@ int esPosibleOperar(int bandera)
 	{
 		printf("\n\t\t<--Un momento! No hay empleados cargados para operar.\n\t\tIngrese un empleado con la opcion 1.-->\n");
 		retorno = FALSE;
-	}
-	return retorno;
-}
-
-/*
-* \brief Opera el menu de Altas de empleados (opcion 1)
-* \param Employee listaEmpleados - Lista de empleados
-* \param int len - largo del array
-* \param int* idMaximo - Id maximo hasta el momento
-* \param int* banderaAltas - puntero a bandera de altas, para retornar que se cargo un empleado
-* \return retorna INT. 0 si esta todo OK.
-* 		  retorna  1 si presiona <<atras, cancelando el alta.
-*         retorna -1 si la direccion de memoria del array es NULL.
-*         retorna -2 si el len es invalido.
-*         retorna -14 si No se pudieron tomar los datos correctamente
-*/
-int operarMenuAltas(Employee listaEmpleados[], int len, int* idMaximo, int* banderaAltas)
-{
-	int estadoOperacion;
-	int opcionElegidaPrimerSubMenu;
-	int opcionElegidaSegundoSubMenu;
-	int retorno = PUNTERO_NULL;
-
-	if(listaEmpleados != NULL && idMaximo != NULL && banderaAltas != NULL)
-	{
-		retorno = LEN_INVALIDO;
-		if(len >0 && len <= TAM_LISTA_EMPLEADOS)
-		{
-			retorno = PRESIONO_ATRAS;
-			do
-			{
-				opcionElegidaPrimerSubMenu = MENU_ALTAS_ATRAS;
-			    imprimirMenuSecundario(MENU_ALTAS, MENU_ALTAS_DESEA_DAR_ALTA);
-				estadoOperacion=ingreseUnaOpcion(&opcionElegidaPrimerSubMenu, MENU_ALTAS_MINIMO, MENU_ALTAS_MAXIMO);
-
-				if(opcionElegidaPrimerSubMenu == MENU_ALTAS_DAR_UNA_ALTA)
-				{
-					do
-					{
-						retorno = NO_SE_PUDIERON_TOMAR_DATOS_CORRECTAMENTE;
-						opcionElegidaSegundoSubMenu = MENU_ALTAS_ATRAS;
-						imprimirMenuSecundario(MENU_ALTAS, MENU_ALTAS_COMPLETAR_CAMPOS);
-						estadoOperacion = tomarDatosEmpleados(listaEmpleados, TAM_LISTA_EMPLEADOS, idMaximo);
-						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-						{
-							printf("\n\t\t<-Empleado cargado exitosamente!->\n");
-							retorno = OPERACION_EXITOSA;
-							*banderaAltas = SE_PUEDE_OPERAR_BAJA_MOD_MUESTRA;
-
-							imprimirMenuSecundario(MENU_ALTAS, MENU_ALTAS_DESEA_OTRA_ALTA_MAS);
-							estadoOperacion = ingreseUnaOpcion(&opcionElegidaSegundoSubMenu, MENU_ALTAS_MINIMO,MENU_ALTAS_MAXIMO);
-							utn_comprobarEstadoDeOperacion(estadoOperacion);
-						}
-					}while(opcionElegidaSegundoSubMenu == MENU_ALTAS_DAR_UNA_ALTA);
-
-					if(opcionElegidaSegundoSubMenu == MENU_ALTAS_ATRAS && estadoOperacion == OPERACION_EXITOSA)
-					{
-						break;
-					}
-				}
-			}while(opcionElegidaPrimerSubMenu == MENU_ALTAS_DAR_UNA_ALTA && estadoOperacion != NO_SE_PUDO_TOMAR_UN_DATO_VALIDO);
-		}
 	}
 	return retorno;
 }
@@ -382,6 +305,7 @@ int operarMenuBajas(Employee listaEmpleados[], int len, int idMaximo)
 	return retorno;
 }
 
+
 /*
 * \brief Opera el menu de muestra de informacion (opcion 4)
 * \param Employee listaEmpleados - Lista de empleados
@@ -431,3 +355,4 @@ int operarMenuMostrarInformacion(Employee listaEmpleados[], int len)
 	}
 	return retorno;
 }
+

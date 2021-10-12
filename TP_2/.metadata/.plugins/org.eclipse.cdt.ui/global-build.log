@@ -1303,3 +1303,63 @@ collect2.exe: error: ld returned 1 exit status
 Info: Internal Builder is used for build
 gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
 Info: Nothing to build for TP_2
+11:20:24 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+..\src\TP_2.c: In function 'main':
+..\src\TP_2.c:133:26: warning: implicit declaration of function 'operarMenuMostrarInformacion'; did you mean 'operarMenuModificacion'? [-Wimplicit-function-declaration]
+  133 |        estadoOperacion = operarMenuMostrarInformacion(listaEmpleados, TAM_LISTA_EMPLEADOS);
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+      |                          operarMenuModificacion
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+11:21:00 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+11:24:44 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+13:45:18 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+13:49:20 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+13:55:44 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Inputs.o" "..\\src\\Inputs.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayEmployees.o" "..\\src\\ArrayEmployees.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ComprobarErrores.o" "..\\src\\ComprobarErrores.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+14:09:35 **** Incremental Build of configuration Debug for project TP_2 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_2.o" "..\\src\\TP_2.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Menus.o" "..\\src\\Menus.c" 
+gcc -o TP_2.exe "src\\ArrayEmployees.o" "src\\ComprobarErrores.o" "src\\Inputs.o" "src\\Menus.o" "src\\TP_2.o" 
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2
+Info: Nothing to build for TP_2

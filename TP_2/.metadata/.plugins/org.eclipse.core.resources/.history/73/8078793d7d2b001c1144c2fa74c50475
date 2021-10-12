@@ -87,10 +87,11 @@ int main(void)
 
 								if(estadoOperacion == ELIMINACION_EXITOSA)
 								{
+									//Despues de haber eliminado al empleado, verifico que aun existan empleados en la lista.
 									estadoOperacion = verificarSiHayEmpleados(listaEmpleados, TAM_LISTA_EMPLEADOS);
 									if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 									{
-										if(estadoOperacion == NO_HAY_MAS_EMPLEADOS)
+										if(estadoOperacion == NO_HAY_MAS_EMPLEADOS) //Si es 0, ya no quedan empleados
 										{
 											printf("\n\t\t<-No hay mas empleados en el sistema!->\n");
 											banderaModificarBajaInformar = NO_SE_PUEDE_OPERAR_MODIFICACION_BAJA_MUESTRA_DE_DATOS;
