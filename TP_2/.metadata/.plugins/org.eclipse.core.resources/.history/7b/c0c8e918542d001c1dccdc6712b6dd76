@@ -56,17 +56,20 @@
 */
 void imprimirMenuPrincipal(void)
 {
+	char* pMensaje;
 	static int banderaMenu = 0;
 
 	if(banderaMenu)
 	{
-		printf("\n\t\t<--Volviendo al Menu Principal-->\n\n");
+		pMensaje = "\n\t\t<--Volviendo al Menu Principal-->\n\n";
 	}
 	else
 	{
-		printf("\n\t<--Bienvenido al sistema de carga de datos de Empleados-->\n\n");
+		pMensaje = "\n\t<--Bienvenido al sistema de carga de datos de Empleados-->\n\n";
 		banderaMenu = 1;
 	}
+
+	printf("%s", pMensaje);
 
 	printf("\t\t<--Menu Principal-->\n1 >>Alta de personal\n2 >>Modificar\n3 >>Baja de personal\n4 >>Informar\n5 <<Salir");
 }
@@ -79,64 +82,68 @@ void imprimirMenuPrincipal(void)
 */
 void imprimirMenuSecundario(int opcionUno, int opcionDos)
 {
+	char* pMensaje;
+	char* pMensajeDos;
+
 	switch(opcionUno)
 	{
 		case 0:
-			printf("\n\n\t\t<--Menu de Alta de datos-->");
+			pMensaje ="\n\n\t\t<--Menu de Alta de datos-->";
 			break;
 		case 1:
-			printf("\n\n\t\t<--Menu de modificacion de datos-->");
+			pMensaje ="\n\n\t\t<--Menu de modificacion de datos-->";
 			break;
 		case 2:
-			printf("\n\n\t\t<--Menu de Baja de Ids-->");
+			pMensaje ="\n\n\t\t<--Menu de Baja de Ids-->";
 			break;
 		case 3:
-			printf("\n\n\t\t<--Menu para muestra de informacion-->");
+			pMensaje ="\n\n\t\t<--Menu para muestra de informacion-->";
 			break;
 		case 4:
-			printf("\n\n\t\t<--Menu salida de programa-->");
+			pMensaje ="\n\n\t\t<--Menu salida de programa-->";
 			break;
 	}
 
 	switch(opcionDos)
 	{
 		case 0:
-			printf("\n>>A continuacion, complete los campos con los datos solicitados\n");
+			pMensajeDos="\n>>A continuacion, complete los campos con los datos solicitados\n";
 			break;
 		case 1:
-			printf("\n>>A continuacion, ingrese el Id del empleado que desee modificar\n<<o pulse '0' para volver atras");
+			pMensajeDos ="\n>>A continuacion, ingrese el Id del empleado que desee modificar\n<<o pulse '0' para volver atras";
 			break;
 		case 2:
-			printf("\n>>A continuacion indique el campo que desea modificar\n\t1 >>Nombre\n\t2 >>Apellido\n\t3 >>Salario \n\t4 >>Sector \n\t5 <<Atras");
+			pMensajeDos ="\n>>A continuacion indique el campo que desea modificar\n\t1 >>Nombre\n\t2 >>Apellido\n\t3 >>Salario \n\t4 >>Sector \n\t5 <<Atras";
 			break;
 		case 3:
-			printf("\n>>A continuacion ingrese el Id que desee dar de baja\n<<o pulse '0' para volver atras");
+			pMensajeDos ="\n>>A continuacion ingrese el Id que desee dar de baja\n<<o pulse '0' para volver atras";
 			break;
 		case 4:
-			printf("\nSeguro desea eliminar la informacion asociada a ese Id? \n\t1 >>Si\n\t2 <<Volver\n");
+			pMensajeDos ="\nSeguro desea eliminar la informacion asociada a ese Id? \n\t1 >>Si\n\t2 <<Volver\n";
 			break;
 		case 5:
-			printf("\nDesea continuar dando de baja otros Id?\n\t1 >>Si\n\t2 <<Atras");
+			pMensajeDos = "\nDesea continuar dando de baja otros Id?\n\t1 >>Si\n\t2 <<Atras";
 			break;
 		case 6:
-			printf("\n>>A continuacion seleccione la informacion que desea mostrar"
+			pMensajeDos = "\n>>A continuacion seleccione la informacion que desea mostrar"
 							"\n\t0 >>Listado de empleados, ordenado de forma Descendete (Z-A)"
 							"\n\t1 >>Listado de empleados, ordenado de forma Ascendente(A-Z)"
-							"\n\t2 >>Informacion relacionada con los salarios\n\t3 <<Atras");
+							"\n\t2 >>Informacion relacionada con los salarios\n\t3 <<Atras";
 			break;
 		case 7:
-			printf("\nDesea continuar modificando al empleado seleccionado?\n\t1 >>Si\n\t2 <<Atras");
+			pMensajeDos = "\nDesea continuar modificando al empleado seleccionado?\n\t1 >>Si\n\t2 <<Atras";
 			break;
 		case 8:
-			printf("\nDesea salir del programa?\n\t1 >>Si\n\t2 <<Atras");
+			pMensajeDos = "\nDesea salir del programa?\n\t1 >>Si\n\t2 <<Atras";
 			break;
 		case 9:
-			printf("\nDesea continuar con otra alta?\n\t1 >>Si\n\t2 <<Atras");
+			pMensajeDos = "\nDesea continuar con otra alta?\n\t1 >>Si\n\t2 <<Atras";
 			break;
 		case 10:
-			printf("\nDesea dar una alta?\n\t1 >>Si\n\t2 <<Atras");
+			pMensajeDos = "\nDesea dar una alta?\n\t1 >>Si\n\t2 <<Atras";
 			break;
 	}
+	printf("%s %s", pMensaje, pMensajeDos);
 }
 
 /*

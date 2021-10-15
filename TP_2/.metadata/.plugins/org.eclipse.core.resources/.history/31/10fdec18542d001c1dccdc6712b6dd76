@@ -6,27 +6,10 @@
  */
 
 #include "ComprobarErrores.h"
+#define EXITO 1
+#define ERROR 0
 
 static void imprimirErrores(int codigoError);
-/*
-* \brief Evalua el exito de una operacion. Si hay exito, no realiza acciones.
-*        Ante una falla (estado menor que 0), se apoya en otra funcion imprimirErrores (int codigoError),
-*        enviandole el estado recibido de la operacion (que almacena el codigo de error).
-* \param int estadoOperacion - Valor que identifica el estado (exito o falla) de una operacion.
-* \return retorna un INT. 1 si la operacion recibida fue exitosa.
-* 		  retorna 0 si la operacion recibida no fue exitosa.
-*/
-int utn_comprobarEstadoDeOperacion(int estadoOperacion)
-{
-	int retorno = 1; //Hay exito
-
-	if(estadoOperacion < 0)
-	{
-		imprimirErrores(estadoOperacion);
-		retorno = 0; //Fallo
-	}
-	return retorno;
-}
 
 /*
 * \brief Evalua el codigo de error recibido, e imprime el error asociado (si corresponde).
@@ -100,7 +83,7 @@ static void imprimirErrores(int codigoError)
 			pMensaje = "\n\t\t--No se encontraron datos asociados al ID indicado.--\n";
 			break;
 		case -21:
-			pMensaje = "\n\t\t--ERROR. El listado esta lleno. No se pueden agregar mas empleados.--\n";
+			pMensaje = "\n\t\t--ERROR. El listado esta lleno. No se pueden cargar mas empleados.--\n";
 			break;
 		case -22:
 			pMensaje = "\n\t\t--ERROR. No se pudo obtener una respuesta valida.--\n";
@@ -111,9 +94,31 @@ static void imprimirErrores(int codigoError)
 		case -24:
 			pMensaje = "\n\t\t--ERROR. Error al intentar borrar espacios en blanco.--\n";
 			break;
+		case -25:
+			pMensaje = "\n\t\t--ERROR. No se pudo llevar a cabo ningun alta.--\n";
+			break;
 		default :
 			pMensaje = "\n\t\t--ERROR.--\n";
 	}
 	printf("%s", pMensaje);
 }
 
+/*
+* \brief Evalua el exito de una operacion. Si hay exito, no realiza acciones.
+*        Ante una falla (estado menor que 0), se apoya en otra funcion imprimirErrores (int codigoError),
+*        enviandole el estado recibido de la operacion (que almacena el codigo de error).
+* \param int estadoOperacion - Valor que identifica el estado (exito o falla) de una operacion.
+* \return retorna un INT. 1 si la operacion recibida fue exitosa.
+* 		  retorna 0 si la operacion recibida no fue exitosa.
+*/
+int utn_comprobarEstadoDeOperacion(int estadoOperacion)
+{
+	int retorno = EXITO;
+
+	if(estadoOperacion < 0)
+	{
+		imprimirErrores(estadoOperacion);
+		retorno = ERROR;
+	}
+	return retorno;
+}
