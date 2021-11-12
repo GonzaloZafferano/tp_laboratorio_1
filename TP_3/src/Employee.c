@@ -32,6 +32,10 @@
 #define SEGUNDO_ES_MAYOR -1
 #define OBTENER_ACTUAL_ULTIMO_ID 1
 #define OBTENER_NUEVO_ULTIMO_ID 2
+#define SIN_INGRESOS 0
+#define PRIMER_INGRESO_OK 1
+#define NO_SE_ENCONTRO_ARCHIVO_DE_ID 2
+#define ARCHIVO_ID_CREADO_O_ACTUALIZADO 3
 
 static int employee_abrirArchivoConUltimoId(char* path, int* pUltimoId);
 static int employee_guardarUltimoIdEnArchivo(char* path, int ultimoId);
@@ -866,10 +870,6 @@ int employee_gettersFromEmployee(Employee* pEmpleado, int* pId, int* pHorasTraba
 	return retorno;
 }
 
-#define SIN_INGRESOS 0
-#define PRIMER_INGRESO_OK 1
-#define NO_SE_ENCONTRO_ARCHIVO_DE_ID 2
-#define ARCHIVO_ID_CREADO_O_ACTUALIZADO 3
 /** \brief obtiene el ultimo ID o el proximo, segun el parametro recibido
 * \param  int opcion - opcion que determina si se obtiene el ultimo ID (1) o el proximo ID (2)
 * \return int. Retorna 0 o positivo, que es el ID obtenido o

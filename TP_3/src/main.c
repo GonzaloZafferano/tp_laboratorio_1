@@ -37,6 +37,7 @@
 #define ARCHIVO_TEXTO_CARGADO 1
 #define ARCHIVO_BINARIO_CARGADO 2
 #define LEN_ARCHIVO 50
+#define PRIMER_INGRESO 1
 
 int main()
 {
@@ -56,149 +57,151 @@ int main()
 	char pathArchivoTexto [LEN_ARCHIVO] = "data.csv";
     LinkedList* listaEmpleados = ll_newLinkedList();
 
-    do{
-    	estadoOperacion = menu_ImprimirMenuPrincipal(&opcionElegida);
-    	if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-    	{
-			switch(opcionElegida)
+    if(listaEmpleados != NULL && employee_getLastOrNextId(PRIMER_INGRESO) >= 0)
+	{
+		do{
+			estadoOperacion = menu_ImprimirMenuPrincipal(&opcionElegida);
+			if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 			{
-				case 1:
-					if(menu_EsPosibleOperarMenu(banderaTexto))
-					{
-						respuestaPrimeraCargaTexto = controller_loadFromText(pathArchivoTexto, listaEmpleados);
-						if(utn_comprobarEstadoDeOperacion(respuestaPrimeraCargaTexto) && !respuestaPrimeraCargaTexto)
+				switch(opcionElegida)
+				{
+					case 1:
+						if(menu_EsPosibleOperarMenu(banderaTexto))
 						{
-							banderaTexto = ARCHIVO_TEXTO_CARGADO;
-							banderaBinario = ARCHIVO_TEXTO_CARGADO;
-						}
-
-						if(respuestaPrimeraCargaTexto == ERROR_ARCHIVO_TEXTO_NO_EXISTE && respuestaPrimeraCargaBinario == ERROR_ARCHIVO_BINARIO_NO_EXISTE)
-						{
-							menu_mensajesAlerta(ARCHIVOS_INEXISTENTES);
-							banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
-						}
-					}
-					break;
-				case 2:
-					if(menu_EsPosibleOperarMenu(banderaBinario))
-					{
-						respuestaPrimeraCargaBinario = controller_loadFromBinary(pathArchivoBinario, listaEmpleados);
-						if(utn_comprobarEstadoDeOperacion(respuestaPrimeraCargaBinario) && !respuestaPrimeraCargaBinario)
-						{
-							banderaBinario = ARCHIVO_BINARIO_CARGADO;
-							banderaTexto = ARCHIVO_BINARIO_CARGADO;
-						}
-
-						if(respuestaPrimeraCargaTexto == ERROR_ARCHIVO_TEXTO_NO_EXISTE && respuestaPrimeraCargaBinario == ERROR_ARCHIVO_BINARIO_NO_EXISTE)
-						{
-							menu_mensajesAlerta(ARCHIVOS_INEXISTENTES);
-							banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
-						}
-					}
-					break;
-				case 3:
-					estadoOperacion = controller_addEmployee(listaEmpleados);
-					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-					{
-						banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
-						banderaCargarTexto = ARCHIVO_SIN_CARGAR;
-						banderaCargarBinario = ARCHIVO_SIN_CARGAR;
-					}
-					break;
-				case 4:
-					estadoOperacion= controller_editEmployee(listaEmpleados);
-					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-					{
-						banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
-						banderaCargarTexto = ARCHIVO_SIN_CARGAR;
-						banderaCargarBinario = ARCHIVO_SIN_CARGAR;
-					}
-					break;
-				case 5:
-					estadoOperacion = controller_removeEmployee(listaEmpleados);
-					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-					{
-						banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
-						banderaCargarTexto = ARCHIVO_SIN_CARGAR;
-						banderaCargarBinario = ARCHIVO_SIN_CARGAR;
-					}
-					break;
-				case 6:
-					estadoOperacion = controller_ListEmployee(listaEmpleados);
-					utn_comprobarEstadoDeOperacion(estadoOperacion);
-					break;
-				case 7:
-					estadoOperacion =  controller_sortEmployee(listaEmpleados);
-					if(utn_comprobarEstadoDeOperacion(estadoOperacion) && !estadoOperacion)
-					{
-						banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
-						banderaCargarTexto = ARCHIVO_SIN_CARGAR;
-						banderaCargarBinario = ARCHIVO_SIN_CARGAR;
-					}
-					break;
-				case 8:
-					if((banderaBinario == ARCHIVO_BINARIO_CARGADO || banderaTexto == ARCHIVO_TEXTO_CARGADO) || banderaHabilitarCreacionDeArchivos)
-					{
-						sePuedeGuardar = controller_sePuedeGuardarEnArchivo(listaEmpleados);
-						if(sePuedeGuardar == SI)
-						{
-							estadoOperacion = controller_saveAsText(pathArchivoTexto, listaEmpleados);
-							if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+							respuestaPrimeraCargaTexto = controller_loadFromText(pathArchivoTexto, listaEmpleados);
+							if(utn_comprobarEstadoDeOperacion(respuestaPrimeraCargaTexto) && !respuestaPrimeraCargaTexto)
 							{
-								banderaCargarTexto = ARCHIVO_CARGADO;
-								banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
+								banderaTexto = ARCHIVO_TEXTO_CARGADO;
+								banderaBinario = ARCHIVO_TEXTO_CARGADO;
+							}
 
-								banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
-								banderaBinario = ARCHIVO_CARGADO_EN_SISTEMA;
-								banderaTexto = ARCHIVO_CARGADO_EN_SISTEMA;
+							if(respuestaPrimeraCargaTexto == ERROR_ARCHIVO_TEXTO_NO_EXISTE && respuestaPrimeraCargaBinario == ERROR_ARCHIVO_BINARIO_NO_EXISTE)
+							{
+								menu_mensajesAlerta(ARCHIVOS_INEXISTENTES);
+								banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
 							}
 						}
-					}
-					else
-					{
-						menu_mensajesAlerta(FALTA_CARGAR_ARCHIVOS);
-					}
 						break;
-				case 9:
-					if((banderaBinario == ARCHIVO_BINARIO_CARGADO || banderaTexto == ARCHIVO_TEXTO_CARGADO) || banderaHabilitarCreacionDeArchivos)
-					{
-						sePuedeGuardar = controller_sePuedeGuardarEnArchivo(listaEmpleados);
-						if(sePuedeGuardar == SI)
+					case 2:
+						if(menu_EsPosibleOperarMenu(banderaBinario))
 						{
-							estadoOperacion = controller_saveAsBinary(pathArchivoBinario, listaEmpleados);
-							if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+							respuestaPrimeraCargaBinario = controller_loadFromBinary(pathArchivoBinario, listaEmpleados);
+							if(utn_comprobarEstadoDeOperacion(respuestaPrimeraCargaBinario) && !respuestaPrimeraCargaBinario)
 							{
-								banderaCargarBinario = ARCHIVO_CARGADO;
+								banderaBinario = ARCHIVO_BINARIO_CARGADO;
+								banderaTexto = ARCHIVO_BINARIO_CARGADO;
+							}
+
+							if(respuestaPrimeraCargaTexto == ERROR_ARCHIVO_TEXTO_NO_EXISTE && respuestaPrimeraCargaBinario == ERROR_ARCHIVO_BINARIO_NO_EXISTE)
+							{
+								menu_mensajesAlerta(ARCHIVOS_INEXISTENTES);
 								banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
-								banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
-								banderaBinario = ARCHIVO_CARGADO_EN_SISTEMA;
-								banderaTexto = ARCHIVO_CARGADO_EN_SISTEMA;
 							}
 						}
-					}
-					else
-					{
-						menu_mensajesAlerta(FALTA_CARGAR_ARCHIVOS);
-					}
-					break;
-				case 10:
-					estadoOperacion = controller_exitApp(listaEmpleados, banderaCargarTexto, banderaCargarBinario, banderaRealizoUnaModificacionEnSistema);
-					if(utn_comprobarEstadoDeOperacion(estadoOperacion))
-					{
-						opcionElegida = estadoOperacion;
-						if(opcionElegida == SALIR)
+						break;
+					case 3:
+						estadoOperacion = controller_addEmployee(listaEmpleados);
+						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 						{
-					    	if(!ll_clear(listaEmpleados))
-					    	{
-					    		ll_deleteLinkedList(listaEmpleados);
-					    	}
+							banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
+							banderaCargarTexto = ARCHIVO_SIN_CARGAR;
+							banderaCargarBinario = ARCHIVO_SIN_CARGAR;
 						}
-					}
-					break;
-			}
-    	}
-    }while(opcionElegida != SALIR);
+						break;
+					case 4:
+						estadoOperacion= controller_editEmployee(listaEmpleados);
+						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+						{
+							banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
+							banderaCargarTexto = ARCHIVO_SIN_CARGAR;
+							banderaCargarBinario = ARCHIVO_SIN_CARGAR;
+						}
+						break;
+					case 5:
+						estadoOperacion = controller_removeEmployee(listaEmpleados);
+						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+						{
+							banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
+							banderaCargarTexto = ARCHIVO_SIN_CARGAR;
+							banderaCargarBinario = ARCHIVO_SIN_CARGAR;
+						}
+						break;
+					case 6:
+						estadoOperacion = controller_ListEmployee(listaEmpleados);
+						utn_comprobarEstadoDeOperacion(estadoOperacion);
+						break;
+					case 7:
+						estadoOperacion =  controller_sortEmployee(listaEmpleados);
+						if(utn_comprobarEstadoDeOperacion(estadoOperacion) && !estadoOperacion)
+						{
+							banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
+							banderaCargarTexto = ARCHIVO_SIN_CARGAR;
+							banderaCargarBinario = ARCHIVO_SIN_CARGAR;
+						}
+						break;
+					case 8:
+						if((banderaBinario == ARCHIVO_BINARIO_CARGADO || banderaTexto == ARCHIVO_TEXTO_CARGADO) || banderaHabilitarCreacionDeArchivos)
+						{
+							sePuedeGuardar = controller_sePuedeGuardarEnArchivo(listaEmpleados);
+							if(sePuedeGuardar == SI)
+							{
+								estadoOperacion = controller_saveAsText(pathArchivoTexto, listaEmpleados);
+								if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+								{
+									banderaCargarTexto = ARCHIVO_CARGADO;
+									banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
 
+									banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
+									banderaBinario = ARCHIVO_CARGADO_EN_SISTEMA;
+									banderaTexto = ARCHIVO_CARGADO_EN_SISTEMA;
+								}
+							}
+						}
+						else
+						{
+							menu_mensajesAlerta(FALTA_CARGAR_ARCHIVOS);
+						}
+							break;
+					case 9:
+						if((banderaBinario == ARCHIVO_BINARIO_CARGADO || banderaTexto == ARCHIVO_TEXTO_CARGADO) || banderaHabilitarCreacionDeArchivos)
+						{
+							sePuedeGuardar = controller_sePuedeGuardarEnArchivo(listaEmpleados);
+							if(sePuedeGuardar == SI)
+							{
+								estadoOperacion = controller_saveAsBinary(pathArchivoBinario, listaEmpleados);
+								if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+								{
+									banderaCargarBinario = ARCHIVO_CARGADO;
+									banderaHabilitarCreacionDeArchivos = SE_HABILITA_CREACION_ARCHIVOS;
+									banderaRealizoUnaModificacionEnSistema = MODIFICACION_REALIZADA_EN_LISTA;
+									banderaBinario = ARCHIVO_CARGADO_EN_SISTEMA;
+									banderaTexto = ARCHIVO_CARGADO_EN_SISTEMA;
+								}
+							}
+						}
+						else
+						{
+							menu_mensajesAlerta(FALTA_CARGAR_ARCHIVOS);
+						}
+						break;
+					case 10:
+						estadoOperacion = controller_exitApp(listaEmpleados, banderaCargarTexto, banderaCargarBinario, banderaRealizoUnaModificacionEnSistema);
+						if(utn_comprobarEstadoDeOperacion(estadoOperacion))
+						{
+							opcionElegida = estadoOperacion;
+							if(opcionElegida == SALIR)
+							{
+								if(!ll_clear(listaEmpleados))
+								{
+									ll_deleteLinkedList(listaEmpleados);
+								}
+							}
+						}
+						break;
+				}
+			}
+		}while(opcionElegida != SALIR);
+	}
     printf("\n\t\t<--Fin del Programa-->");
     return 0;
 }
