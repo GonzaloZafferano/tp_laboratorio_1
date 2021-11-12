@@ -42,6 +42,7 @@
 int main()
 {
 	setbuf(stdout, NULL);
+	int esListaVacia;
 	int estadoOperacion;
     int opcionElegida = 0;
 	int sePuedeGuardar = NO;
@@ -142,7 +143,8 @@ int main()
 					case 8:
 						if((banderaBinario == ARCHIVO_BINARIO_CARGADO || banderaTexto == ARCHIVO_TEXTO_CARGADO) || banderaHabilitarCreacionDeArchivos)
 						{
-							sePuedeGuardar = controller_sePuedeGuardarEnArchivo(listaEmpleados);
+							esListaVacia = ll_isEmpty(listaEmpleados);
+							sePuedeGuardar = menu_guardarListaVaciaEnArchivo(esListaVacia);
 							if(sePuedeGuardar == SI)
 							{
 								estadoOperacion = controller_saveAsText(pathArchivoTexto, listaEmpleados);
@@ -165,7 +167,8 @@ int main()
 					case 9:
 						if((banderaBinario == ARCHIVO_BINARIO_CARGADO || banderaTexto == ARCHIVO_TEXTO_CARGADO) || banderaHabilitarCreacionDeArchivos)
 						{
-							sePuedeGuardar = controller_sePuedeGuardarEnArchivo(listaEmpleados);
+							esListaVacia = ll_isEmpty(listaEmpleados);
+							sePuedeGuardar = menu_guardarListaVaciaEnArchivo(esListaVacia);
 							if(sePuedeGuardar == SI)
 							{
 								estadoOperacion = controller_saveAsBinary(pathArchivoBinario, listaEmpleados);

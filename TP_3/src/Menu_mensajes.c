@@ -38,6 +38,7 @@
 #define GUARDAR_LISTA 2
 #define ERROR_SIN_MAS_REINTENTOS -21
 #define OBTENER_ACTUAL_ULTIMO_ID 1
+#define TRUE 1
 
 /*
 * \brief Imprime el menu principal y toma una respuesta
@@ -237,22 +238,35 @@ int menu_ImprimirMenuBajas(int opcion, int* pRespuesta)
 
 /*
 * \brief Imprime el menu de confirmacion para guardar una lista vacia
-* \param int* pRespuesta - puntero a variable que espera una respuesta del usuario
+* \param int esListaVacia - indica si la lista esta vacia o no
 * \return Retorna INT. Retorna -1 si el puntero es NULL o
 *  retorna el estado de la operacion de toma de datos (0 Si opero correctamente, negativo si ocurrio un error)
 */
-int menu_guardarListaVaciaEnArchivo(int* pRespuesta)
+int menu_guardarListaVaciaEnArchivo(int esListaVacia)
 {
+	int opcionElegida;
 	int estadoOperacion;
-	int retorno = ERROR_PUNTERO_NULL;
+	int retorno = NO;
 
-	if(pRespuesta != NULL)
+	if(esListaVacia == TRUE)
 	{
 		printf("\nLa lista se encuentra vacia! Desea guardar la lista vacia en el archivo de todos modos?"
 				"\n\t1 >>Si, guardar lista vacia en archivo! \n\t2 <<No, no guardar y volver al menu principal");
-		estadoOperacion = utn_ingreseUnaOpcion(pRespuesta, SI, NO);
-		retorno = estadoOperacion;
+		estadoOperacion = utn_ingreseUnaOpcion(&opcionElegida, SI, NO);
 	}
+	else
+	{
+		if(esListaVacia == ERROR_PUNTERO_NULL)
+		{
+			printf("\n\t\t--Error en la verificacion de la lista!--\n");
+		}
+	}
+
+	if(!esListaVacia || (utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida == SI))
+	{
+		retorno = SI;
+	}
+
 	return retorno;
 }
 

@@ -22,7 +22,7 @@ int menu_ImprimirMenuModificacion(int opcion, int* pRespuesta);
 int menu_ImprimirMenuAltas(int* pRespuesta);
 int menu_ImprimirMenuPrincipal(int* pRespuesta);
 void menu_imprimirCantidadCargasDesdeArchivo(int contador, int estadoOperacion);
-int menu_guardarListaVaciaEnArchivo(int* pRespuesta);
+int menu_guardarListaVaciaEnArchivo(int esListaVacia);
 int menu_ImprimirMenuSalir(int opcion, int* pRespuesta);
 int menu_ImprimirMenuGuardarListaArchivo(int opcion, int* pRespuesta);
 int menu_imprimirMenuTomaDeId();

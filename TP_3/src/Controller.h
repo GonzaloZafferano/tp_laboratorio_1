@@ -27,7 +27,6 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee);
 int controller_sortEmployee(LinkedList* pArrayListEmployee);
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee);
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
-int controller_sePuedeGuardarEnArchivo(LinkedList* pArraylist);
 int controller_exitApp(LinkedList* pArraylist, int banderaArchivoTexto, int banderaArchivoBinario, int banderaModificacion);
 
 #endif /* CONTROLLER_H_ */

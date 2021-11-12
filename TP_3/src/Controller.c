@@ -44,10 +44,13 @@
 #define OBTENER_NUEVO_ULTIMO_ID 2
 #define LEN_ARCHIVO 50
 
-static int controller_LoadFile(char* path, LinkedList* pArrayList, int tipoArchivo, int* contadorCargas);
-static int controller_agregarElementoDeListaDeArchivoAListaDeSistema(LinkedList* pArrayListaOriginal, LinkedList* pListaClon);
-static int controller_evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal, LinkedList* pListaClon, int operacion);
-static int controller_loadListToFile(char* path , LinkedList* pArrayListEmployee, int* contadorCargas, int tipoArchivo);
+static int cargarArchivo(char* path, LinkedList* pArrayList, int tipoArchivo, int* contadorCargas);
+static int cargarListaEnArchivo(char* path , LinkedList* pArrayListEmployee, int* contadorCargas, int tipoArchivo);
+static int agregarElementoDeListaDeArchivoAListaDeSistema(LinkedList* pArrayListaOriginal, LinkedList* pListaClon);
+static int evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal, LinkedList* pListaClon, int operacion);
+static int guardarListaEnModoBinario(char* path , LinkedList* pArrayListEmployee);
+static int guardarListaEnModoTexto(char* path, LinkedList* pArrayListEmployee);
+static int imprimirListaDeEmpleados(LinkedList* pArrayListEmployee);
 
 /** \brief Carga los datos de los empleados a la LinkedList
  * \param char* path - Ruta absoluta o relativa del archivo
@@ -59,7 +62,7 @@ static int controller_loadListToFile(char* path , LinkedList* pArrayListEmployee
  *               retorna -42 si ocurrio un error en la carga del archivo a la lista o
  *               retorna -48 si el archivo no exite
  */
-static int controller_LoadFile(char* path, LinkedList* pArrayList, int tipoArchivo, int* pContadorCargas)
+static int cargarArchivo(char* path, LinkedList* pArrayList, int tipoArchivo, int* pContadorCargas)
 {
 	int estadoOperacion;
 	FILE* fpArchivo;
@@ -122,7 +125,7 @@ static int controller_LoadFile(char* path, LinkedList* pArrayList, int tipoArchi
  *               retorna -1 si el puntero es NULL o
  *               retorna -42 si no se obtuvo una respuesta valida del usuario
  */
-static int controller_evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal, LinkedList* pListaArchivo, int operacion)
+static int evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal, LinkedList* pListaArchivo, int operacion)
 {
 	int respuesta = NO;
 	int retorno = ERROR_PUNTERO_NULL;
@@ -135,7 +138,7 @@ static int controller_evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal
 			estadoOperacion = menu_ImprimirMenuGuardarListaArchivo(MOSTRAR_LISTA, &respuesta);
 			if(utn_comprobarEstadoDeOperacion(estadoOperacion) && respuesta == SI)
 			{
-				controller_ListEmployee(pListaArchivo);
+				imprimirListaDeEmpleados(pListaArchivo);
 			}
 
 			estadoOperacion = menu_ImprimirMenuGuardarListaArchivo(GUARDAR_LISTA, &respuesta);
@@ -152,7 +155,7 @@ static int controller_evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal
 
 		if(operacion == OPERACION_EXITOSA || (estadoOperacion == OPERACION_EXITOSA && respuesta == SI))
 		{
-			estadoOperacion = controller_agregarElementoDeListaDeArchivoAListaDeSistema(pArrayListaOriginal, pListaArchivo);
+			estadoOperacion = agregarElementoDeListaDeArchivoAListaDeSistema(pArrayListaOriginal, pListaArchivo);
 			if(utn_comprobarEstadoDeOperacion(estadoOperacion))
 			{
 				printf("\n\t\t<--Carga completada exitosamente!-->\n");
@@ -170,7 +173,7 @@ static int controller_evaluarUnificacionDeListas(LinkedList* pArrayListaOriginal
  *               retorna -1 si el puntero es NULL o
  *               retorna -41 si no se pudo cargar el elemento a la lista
  */
-static int controller_agregarElementoDeListaDeArchivoAListaDeSistema(LinkedList* pArrayListaOriginal, LinkedList* pListaArchivo)
+static int agregarElementoDeListaDeArchivoAListaDeSistema(LinkedList* pArrayListaOriginal, LinkedList* pListaArchivo)
 {
 	int i;
 	int len;
@@ -200,6 +203,194 @@ static int controller_agregarElementoDeListaDeArchivoAListaDeSistema(LinkedList*
 	return retorno;
 }
 
+/** \brief imprime la lista de empleados
+ * \param LinkedList* pArrayListEmployee - puntero a la lista de empleados
+ * \return int 0 si la operacion resulto exitosa
+ * 	       retorna -1 si el puntero apunta a NULL
+ * 	       retorna -2 si el len es invalido
+ * 	       retorna -30 si no hay elementos en la lista
+ * 	       retorna -37 si no se pudo imprimir
+ */
+static int imprimirListaDeEmpleados(LinkedList* pArrayListEmployee)
+{
+	int i;
+	int len;
+	int retorno = ERROR_PUNTERO_NULL;
+	Employee* pEmpleado;
+	if(pArrayListEmployee != NULL)
+	{
+		retorno = ERROR_NO_HAY_ELEMENTOS_CARGADOS_EN_LA_LISTA;
+		if(!ll_isEmpty(pArrayListEmployee))
+		{
+			retorno = ERROR_LEN_INVALIDO;
+			len = ll_len(pArrayListEmployee);
+			if(len > 0)
+			{
+				printf("\n\t\t<--Lista de empleados-->");
+				employee_ImprimirEncabezadoDeDatos(MOSTRAR_TODOS_LOS_DATOS);
+				for(i = 0; i < len; i++)
+				{
+					retorno = ERROR_NO_SE_PUDO_IMPRIMIR;
+					pEmpleado = ll_get(pArrayListEmployee, i);
+					if(pEmpleado != NULL)
+					{
+						employee_ImprimirFilaDeDatos(pEmpleado, MOSTRAR_TODOS_LOS_DATOS);
+						retorno = OPERACION_EXITOSA;
+					}
+				}
+				if(retorno)
+				{
+					employee_ImprimirFilaVaciaDeDatos(MOSTRAR_TODOS_LOS_DATOS);
+					printf("\n\t\t<--No hay empleados cargados en el sistema-->");
+				}
+			}
+		}
+	}
+	return retorno;
+}
+
+/** \brief Guarda los datos de los empleados en la ruta y el tipo de archivo especificado.
+ * \param char* path - Ruta absoluta o relativa del archivo
+ * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
+ * \param int* contadorCargas - puntero a variable que cuenta la cantidad de cargas realizadas desde la lista al archivo
+* \param int tipoArchivo - tipo de archivo que se desea trabajar, texto o binario
+ * \return int - Retorna   0 si opero correctamente o
+ *   			 retorna  -1 si el puntero es NULL
+ *   			 retorna -40 si no se cargaron correctamente todos los datos en el archivo
+ *   			 retorna -44 si hay un error en la carga del archivo
+ */
+static int cargarListaEnArchivo(char* path , LinkedList* pArrayListEmployee, int* contadorCargas, int tipoArchivo)
+{
+	int i;
+	int len;
+	FILE* fpArchivo;
+	Employee* pEmpleado;
+	int (*pFuncion)(FILE*, Employee*);
+	int retorno = ERROR_PUNTERO_NULL;
+
+	if(path != NULL && pArrayListEmployee != NULL && contadorCargas != NULL)
+	{
+		len = ll_len(pArrayListEmployee);
+		retorno = OPERACION_EXITOSA;
+		if(len >= 0)
+		{
+			switch(tipoArchivo)
+			{
+				case ARCHIVO_TEXTO_CARGADO:
+					fpArchivo = fopen(path, "w");
+					pFuncion = parser_TextFromEmployee;
+					break;
+				case ARCHIVO_BINARIO_CARGADO:
+					fpArchivo = fopen(path, "wb");
+					pFuncion = parser_BinaryFromEmployee;
+					break;
+			}
+
+			if(fpArchivo != NULL)
+			{
+				if(tipoArchivo == ARCHIVO_TEXTO_CARGADO)
+				{
+					fprintf(fpArchivo, "Id,Nombre,Horas trabajadas,Salario\n");
+				}
+
+				for(i = 0; i < len ; i++)
+				{
+					retorno = ERROR_PUNTERO_NULL;
+					pEmpleado = ll_get(pArrayListEmployee, i);
+					if(pEmpleado != NULL)
+					{
+						retorno = ERROR_EN_CARGA_DE_ARCHIVO;
+						if(!pFuncion(fpArchivo, pEmpleado))
+						{
+							*contadorCargas = *contadorCargas + 1;
+							retorno = OPERACION_EXITOSA;
+						}
+					}
+
+					if(!utn_comprobarEstadoDeOperacion(retorno))
+					{
+						retorno = ERROR_NO_SE_CARGARON_CORRECTAMENTE_LOS_DATOS_EN_ARCHIVO;
+						break;
+					}
+				}
+				fclose(fpArchivo);
+			}
+		}
+	}
+	return retorno;
+}
+
+/** \brief Guarda los datos de los empleados en el archivo .csv (modo texto).
+ * \param char* path - Ruta absoluta o relativa del archivo
+ * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
+ * \return int - Retorna 0 si opero correctamente o
+ *   			 retorna -1 si el puntero es NULL
+ *   			 retorna -40 si no se cargaron correctamente todos los datos en el archivo
+ *   			 retorna -44 si hay un error en la carga del archivo
+ */
+static int guardarListaEnModoTexto(char* path, LinkedList* pArrayListEmployee)
+{
+	int estadoOperacion;
+	int contador = 0;
+	int len = ll_len(pArrayListEmployee);
+	int retorno = ERROR_PUNTERO_NULL;
+
+	if(path != NULL && pArrayListEmployee != NULL)
+	{
+		estadoOperacion =  cargarListaEnArchivo(path, pArrayListEmployee, &contador, ARCHIVO_TEXTO_CARGADO);
+		retorno = estadoOperacion;
+
+		if(contador > 0)
+		{
+			printf("\n\t\t<--Se cargaron en el archivo de Texto %d / %d empleados en lista-->\n", contador, len);
+		}
+		else
+		{
+			if(retorno == OPERACION_EXITOSA)
+			{
+				printf("\n\t<--Se completo el guardado de la lista en el archivo de Texto, pero la lista estaba vacia!-->\n");
+			}
+		}
+	}
+	return retorno;
+}
+
+
+/** \brief Guarda los datos de los empleados en el archivo .bin (modo binario).
+ * \param char* path - Ruta absoluta o relativa del archivo
+ * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
+ * \return int - Retorna 0 si opero correctamente o
+ *   			 retorna -1 si el puntero es NULL
+ *   			 retorna -40 si no se cargaron correctamente todos los datos en el archivo
+ *   			 retorna -44 si hay un error en la carga del archivo
+ */
+static int guardarListaEnModoBinario(char* path, LinkedList* pArrayListEmployee)
+{
+	int estadoOperacion;
+	int contador = 0;
+	int len = ll_len(pArrayListEmployee);
+	int retorno = ERROR_PUNTERO_NULL;
+
+	if(path != NULL && pArrayListEmployee != NULL)
+	{
+		estadoOperacion = cargarListaEnArchivo(path, pArrayListEmployee, &contador, ARCHIVO_BINARIO_CARGADO);
+		retorno = estadoOperacion;
+
+		if(contador > 0)
+		{
+			printf("\n\t\t<--Se cargaron en el archivo Binario %d / %d empleados en lista-->\n", contador, len);
+		}
+		else
+		{
+			if(retorno == OPERACION_EXITOSA)
+			{
+				printf("\n\t<--Se completo el guardado de la lista en el archivo Binario, pero la lista estaba vacia!-->\n");
+			}
+		}
+	}
+	return retorno;
+}
+
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  * \param char* path - Ruta absoluta o relativa del archivo
  * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
@@ -218,7 +409,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 	if(path != NULL && pArrayListEmployee != NULL && pListaArchivo != NULL)
 	{
 		retorno = OPERACION_EXITOSA;
-		estadoOperacion = controller_LoadFile(path, pListaArchivo, ARCHIVO_TEXTO_CARGADO, &contadorCargas);
+		estadoOperacion = cargarArchivo(path, pListaArchivo, ARCHIVO_TEXTO_CARGADO, &contadorCargas);
 		if(!utn_comprobarEstadoDeOperacion(estadoOperacion) && (estadoOperacion == ARCHIVO_NO_EXISTE || estadoOperacion == ERROR_PUNTERO_NULL))
 		{
 			retorno = ERROR_ARCHIVO_TEXTO_NO_EXISTE;
@@ -230,7 +421,7 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 				menu_imprimirCantidadCargasDesdeArchivo(contadorCargas, estadoOperacion);
 				if(contadorCargas >0)
 				{
-					estadoOperacion = controller_evaluarUnificacionDeListas(pArrayListEmployee, pListaArchivo, estadoOperacion);
+					estadoOperacion = evaluarUnificacionDeListas(pArrayListEmployee, pListaArchivo, estadoOperacion);
 					if(estadoOperacion != OPERACION_EXITOSA)
 					{
 						retorno = NO;
@@ -266,7 +457,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 	if(path != NULL && pArrayListEmployee != NULL && pListaArchivo != NULL)
 	{
 		retorno = OPERACION_EXITOSA;
-		estadoOperacion = controller_LoadFile(path, pListaArchivo, ARCHIVO_BINARIO_CARGADO, &contadorCargas);
+		estadoOperacion = cargarArchivo(path, pListaArchivo, ARCHIVO_BINARIO_CARGADO, &contadorCargas);
 		if(!utn_comprobarEstadoDeOperacion(estadoOperacion) && (estadoOperacion == ARCHIVO_NO_EXISTE || estadoOperacion == ERROR_PUNTERO_NULL))
 		{
 			retorno = ERROR_ARCHIVO_BINARIO_NO_EXISTE;
@@ -278,7 +469,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 				menu_imprimirCantidadCargasDesdeArchivo(contadorCargas, estadoOperacion);
 				if(contadorCargas >0)
 				{
-					estadoOperacion = controller_evaluarUnificacionDeListas(pArrayListEmployee, pListaArchivo, estadoOperacion);
+					estadoOperacion = evaluarUnificacionDeListas(pArrayListEmployee, pListaArchivo, estadoOperacion);
 					if(estadoOperacion != OPERACION_EXITOSA)
 					{
 						retorno = NO;
@@ -381,7 +572,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
 			if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida == SI)
 			{
-				controller_ListEmployee(pArrayListEmployee);
+				imprimirListaDeEmpleados(pArrayListEmployee);
 				estadoOperacion = menu_imprimirMenuTomaDeId();
 
 				if(utn_comprobarEstadoDeOperacion(estadoOperacion) && estadoOperacion)
@@ -449,7 +640,7 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 
 			if(utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida == SI)
 			{
-				controller_ListEmployee(pArrayListEmployee);
+				imprimirListaDeEmpleados(pArrayListEmployee);
 				estadoOperacion = menu_imprimirMenuTomaDeId();
 
 				if(utn_comprobarEstadoDeOperacion(estadoOperacion) && estadoOperacion)
@@ -505,38 +696,10 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-	int i;
-	int len;
 	int retorno = ERROR_PUNTERO_NULL;
-	Employee* pEmpleado;
 	if(pArrayListEmployee != NULL)
 	{
-		retorno = ERROR_NO_HAY_ELEMENTOS_CARGADOS_EN_LA_LISTA;
-		if(!ll_isEmpty(pArrayListEmployee))
-		{
-			retorno = ERROR_LEN_INVALIDO;
-			len = ll_len(pArrayListEmployee);
-			if(len > 0)
-			{
-				printf("\n\t\t<--Lista de empleados-->");
-				employee_ImprimirEncabezadoDeDatos(MOSTRAR_TODOS_LOS_DATOS);
-				for(i = 0; i < len; i++)
-				{
-					retorno = ERROR_NO_SE_PUDO_IMPRIMIR;
-					pEmpleado = ll_get(pArrayListEmployee, i);
-					if(pEmpleado != NULL)
-					{
-						employee_ImprimirFilaDeDatos(pEmpleado, MOSTRAR_TODOS_LOS_DATOS);
-						retorno = OPERACION_EXITOSA;
-					}
-				}
-				if(retorno)
-				{
-					employee_ImprimirFilaVaciaDeDatos(MOSTRAR_TODOS_LOS_DATOS);
-					printf("\n\t\t<--No hay empleados cargados en el sistema-->");
-				}
-			}
-		}
+		retorno = imprimirListaDeEmpleados(pArrayListEmployee);
 	}
 	return retorno;
 }
@@ -591,7 +754,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 								break;
 						}
 
-						if(!estadoOperacion && !controller_ListEmployee(pArrayListEmployee))
+						if(!estadoOperacion && !imprimirListaDeEmpleados(pArrayListEmployee))
 						{
 							retorno = OPERACION_EXITOSA;
 						}
@@ -611,7 +774,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
     return retorno;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
+/** \brief Controlador que se encarga de iniciar el proceso de guardado de la lista de los empleados en el archivo .csv (modo texto).
  * \param char* path - Ruta absoluta o relativa del archivo
  * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
  * \return int - Retorna el estado recibido de la carga del archivo
@@ -621,32 +784,15 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
-	int estadoOperacion;
-	int contador = 0;
-	int len = ll_len(pArrayListEmployee);
 	int retorno = ERROR_PUNTERO_NULL;
-
 	if(path != NULL && pArrayListEmployee != NULL)
 	{
-		estadoOperacion =  controller_loadListToFile(path, pArrayListEmployee, &contador, ARCHIVO_TEXTO_CARGADO);
-		retorno = estadoOperacion;
-
-		if(contador > 0)
-		{
-			printf("\n\t\t<--Se cargaron en el archivo de Texto %d / %d empleados en lista-->\n", contador, len);
-		}
-		else
-		{
-			if(retorno == OPERACION_EXITOSA)
-			{
-				printf("\n\t<--Se completo el guardado de la lista en el archivo de Texto, pero la lista estaba vacia!-->\n");
-			}
-		}
+		retorno = guardarListaEnModoTexto(path, pArrayListEmployee);
 	}
     return retorno;
 }
 
-/** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
+/** \brief Controlador que se encarga de iniciar el proceso de guardado de la lista de los empleados en el archivo .bin (modo binario).
  * \param char* path - Ruta absoluta o relativa del archivo
  * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
  * \return int - Retorna 0 si opero correctamente o
@@ -654,127 +800,14 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  *   			 retorna -40 si no se cargaron correctamente todos los datos en el archivo
  *   			 retorna -44 si hay un error en la carga del archivo
  */
-int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
+int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
-	int estadoOperacion;
-	int contador = 0;
-	int len = ll_len(pArrayListEmployee);
 	int retorno = ERROR_PUNTERO_NULL;
-
 	if(path != NULL && pArrayListEmployee != NULL)
 	{
-		estadoOperacion = controller_loadListToFile(path, pArrayListEmployee, &contador, ARCHIVO_BINARIO_CARGADO);
-		retorno = estadoOperacion;
-
-		if(contador > 0)
-		{
-			printf("\n\t\t<--Se cargaron en el archivo Binario %d / %d empleados en lista-->\n", contador, len);
-		}
-		else
-		{
-			if(retorno == OPERACION_EXITOSA)
-			{
-				printf("\n\t<--Se completo el guardado de la lista en el archivo Binario, pero la lista estaba vacia!-->\n");
-			}
-		}
+		retorno = guardarListaEnModoBinario(path, pArrayListEmployee);
 	}
     return retorno;
-}
-
-/** \brief Guarda los datos de los empleados en la ruta y el tipo de archivo especificado.
- * \param char* path - Ruta absoluta o relativa del archivo
- * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
- * \param int* contadorCargas - puntero a variable que cuenta la cantidad de cargas realizadas desde la lista al archivo
-* \param int tipoArchivo - tipo de archivo que se desea trabajar, texto o binario
- * \return int - Retorna   0 si opero correctamente o
- *   			 retorna  -1 si el puntero es NULL
- *   			 retorna -40 si no se cargaron correctamente todos los datos en el archivo
- *   			 retorna -44 si hay un error en la carga del archivo
- */
-static int controller_loadListToFile(char* path , LinkedList* pArrayListEmployee, int* contadorCargas, int tipoArchivo)
-{
-	int i;
-	int len;
-	FILE* fpArchivo;
-	Employee* pEmpleado;
-	int (*pFuncion)(FILE*, Employee*);
-	int retorno = ERROR_PUNTERO_NULL;
-
-	if(path != NULL && pArrayListEmployee != NULL && contadorCargas != NULL)
-	{
-		len = ll_len(pArrayListEmployee);
-		retorno = OPERACION_EXITOSA;
-		if(len >= 0)
-		{
-			switch(tipoArchivo)
-			{
-				case ARCHIVO_TEXTO_CARGADO:
-					fpArchivo = fopen(path, "w");
-					pFuncion = parser_TextFromEmployee;
-					break;
-				case ARCHIVO_BINARIO_CARGADO:
-					fpArchivo = fopen(path, "wb");
-					pFuncion = parser_BinaryFromEmployee;
-					break;
-			}
-
-			if(fpArchivo != NULL)
-			{
-				if(tipoArchivo == ARCHIVO_TEXTO_CARGADO)
-				{
-					fprintf(fpArchivo, "Id,Nombre,Horas trabajadas,Salario\n");
-				}
-
-				for(i = 0; i < len ; i++)
-				{
-					retorno = ERROR_PUNTERO_NULL;
-					pEmpleado = ll_get(pArrayListEmployee, i);
-					if(pEmpleado != NULL)
-					{
-						retorno = ERROR_EN_CARGA_DE_ARCHIVO;
-						if(!pFuncion(fpArchivo, pEmpleado))
-						{
-							*contadorCargas = *contadorCargas + 1;
-							retorno = OPERACION_EXITOSA;
-						}
-					}
-
-					if(!utn_comprobarEstadoDeOperacion(retorno))
-					{
-						retorno = ERROR_NO_SE_CARGARON_CORRECTAMENTE_LOS_DATOS_EN_ARCHIVO;
-						break;
-					}
-				}
-				fclose(fpArchivo);
-			}
-		}
-	}
-	return retorno;
-}
-
-/** \brief Controlador que evalua si la lista esta vacia, antes de guardar en archivo. En caso de estar vacia,
- * 		   consulta al usuario si desea proceder a guardar de todas formas.
- * \param  LinkedList* pArrayListEmployee - puntero a la lista de empleados
- * \return int - Retorna 1 si se puede guardar la lista en el archivo
- *               retorna 2 si no se puede guardar la lista en el archivo
- */
-int controller_sePuedeGuardarEnArchivo(LinkedList* pArraylist)
-{
-	int retorno = NO;
-	int opcionElegida;
-	int estadoOperacion;
-	int esListaVacia;
-
-	esListaVacia = ll_isEmpty(pArraylist);
-	if(esListaVacia)
-	{
-		estadoOperacion = menu_guardarListaVaciaEnArchivo(&opcionElegida);
-	}
-	if(!esListaVacia || (utn_comprobarEstadoDeOperacion(estadoOperacion) && opcionElegida == SI))
-	{
-		retorno = SI;
-	}
-	return retorno;
 }
 
 /** \brief Controlador que evalua el estado de los archivos antes de salir de la aplicacion
@@ -808,10 +841,10 @@ int controller_exitApp(LinkedList* pArraylist, int banderaArchivoTexto, int band
 				switch(estadoOperacion)
 				{
 					case ARCHIVO_TEXTO_CARGADO:
-						estadoOperacion = controller_saveAsBinary(pathArchivoBinario, pArraylist);
+						estadoOperacion = guardarListaEnModoBinario(pathArchivoBinario, pArraylist);
 						break;
 					case ARCHIVO_BINARIO_CARGADO:
-						estadoOperacion = controller_saveAsText(pathArchivoTexto, pArraylist);
+						estadoOperacion = guardarListaEnModoTexto(pathArchivoTexto, pArraylist);
 						break;
 					case NINGUN_ARCHIVO_CARGADO:
 						estadoOperacion = menu_ImprimirMenuSalir(CONFIRMAR_SALIR, &opcionElegida);
